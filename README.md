@@ -7,7 +7,7 @@ install
 =======
 
 mkdir /hoge
-git clone https://github.com/miyagaw61/enert /hoge/enert
+git clone https://github.com/miyagaw61/enert /hoge/enert  
 export PYTHONPATH=$PYTHONPATH:/hoge
 
 Usage
@@ -18,55 +18,55 @@ Usage
 from enert.main import *
 ```
 
-* fileクラス
+## fileクラス
 ```python
 file_name = "a.out"
 f = file(file_name)
 ```
-    - 編集
-    ```python
-    f.edit()
-    ```
+- 編集
+```python
+f.edit()
+```
 
-    - 行数取得
-    ```python
-    f.lines()
-    ```
+- 行数取得
+```python
+f.lines()
+```
 
-    - データ読み込み
-    ```python
-    f.data()
-    ```
+- データ読み込み
+```python
+f.data()
+```
 
-    - 行ごとに読み込み
-    ```python
-    f.linedata()
-    ```
+- 行ごとに読み込み
+```python
+f.linedata()
+```
 
-    - バイナリとして読み込み
-    ```python
-    f.binary()
-    ```
+- バイナリとして読み込み
+```python
+f.binary()
+```
 
-    - バイナリをfmt文字ごとにsplitしてリスト化して読み込み
-    ```python
-    fmt = 16
-    f.binary(fmt)
-    ```
+- バイナリをfmt文字ごとにsplitしてリスト化して読み込み
+```python
+fmt = 16
+f.binary(fmt)
+```
 
-* shellクラス
+## shellクラス
 ```python
 cmd = shell("ls | grep *.txt")
 ```
-    - コマンド実行
-    ```python
-    cmd.call()
-    ```
+- コマンド実行
+```python
+cmd.call()
+```
 
-    - コマンドの出力を取得
-    ```python
-    stdout_str, stderr_str = cmd.get()
-    ```
+- コマンドの出力を取得
+```python
+stdout_str, stderr_str = cmd.get()
+```
 
 * 文字に色を付与
 ```python
