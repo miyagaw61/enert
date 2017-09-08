@@ -6,8 +6,8 @@ miyagaw61's python library.
 install
 =======
 
-mkdir /hoge
-git clone https://github.com/miyagaw61/enert /hoge/enert  
+mkdir /hoge  
+git clone https://github.com/miyagaw61/enert /hoge/enert    
 export PYTHONPATH=$PYTHONPATH:/hoge
 
 Usage
