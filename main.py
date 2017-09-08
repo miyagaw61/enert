@@ -1,6 +1,5 @@
-import os, sys, subprocess, re
+import os, sys, subprocess, re, binascii
 from enert import config
-import binascii
 
 class file:
     def __init__(self, file_name):
@@ -22,6 +21,10 @@ class file:
         cmd = [editor, 
                 self.name]
         subprocess.call(cmd)
+
+    def binary(self, fmt="default"):
+        binary_data = open(self.name, "rb").read()
+        return dmp(binary_data, fmt)
 
 class shell:
     def __init__(self, cmd):
@@ -123,25 +126,13 @@ def splitn(data, n):
     length = len(data)
     return [data[i:i+n] for i in range(0, length, n)]
 
-def xxd(a):
+def dmp(binary, fmt=None):
     """
-        Usage: xxd(int a)
-    """
-    a = str(a)
-    hexdump.hexdump(a)
-
-def dmp(binary, fmt="def"):
-    """
-        Usage: dmp(bin binary, fmt=""/"x"/"d")
+        Usage: dmp(bin binary, split=""/"x"/"d")
     """
     res = binascii.hexlify(binary)
-    if(fmt == "x"):
-        arr = splitn(res, 8)
-        res = []
-        for var in arr:
-            res.append(hex(ascii2addr(var.decode())))
-    if(fmt == "d"):
-        arr = splitn(res, 8)
+    if(fmt != None):
+        arr = splitn(res, fmt)
         res = []
         for var in arr:
             res.append(ascii2addr(var.decode()))
