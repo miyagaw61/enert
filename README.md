@@ -43,6 +43,26 @@ f.data()
 f.linedata()
 ```
 
+- 書き込み
+```python
+f.write("hoge\n")
+```
+
+- 追記
+```python
+f.add("hoge\n")
+```
+
+- 存在するかどうか調査
+```python
+f.exist()
+```
+
+- 削除
+```python
+f.rm()
+```
+
 - バイナリとして読み込み
 ```python
 f.binary()
