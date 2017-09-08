@@ -14,6 +14,22 @@ class file:
     def lines(self):
         return len(self.linedata())
 
+    def write(self, data):
+        fd = open(self.name, "w")
+        fd.write(data)
+        fd.close()
+
+    def add(self, data):
+        fd = open(self.name, "a")
+        fd.write(data)
+        fd.close()
+
+    def exsit(self):
+        return os.path.exists(self.name)
+
+    def rm(self):
+        os.unlink(self.name)
+
     def edit(self):
         editor = "vi"
         if os.environ["EDITOR"]:
