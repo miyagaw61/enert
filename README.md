@@ -98,3 +98,9 @@ size_x, size_y = get_term_size()
 ```python
 clear()
 ```
+
+* 文字列をファイルに書き込む
+```python
+buf = "hoge"
+writefile(buf, "buf.txt")
+```
