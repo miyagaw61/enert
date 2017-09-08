@@ -86,3 +86,13 @@ n = 4
 list = splitn(str, n)
 print(list) # -> ["hoge", "fuga", "piyo"]
 ```
+
+* ターミナルのサイズを取得
+```python
+size_x, size_y = get_term_size()
+```
+
+* clear(Ctrl+l)する
+```python
+clear()
+```
