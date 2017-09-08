@@ -24,7 +24,7 @@ class file:
         fd.write(data)
         fd.close()
 
-    def exsit(self):
+    def exist(self):
         return os.path.exists(self.name)
 
     def rm(self):
