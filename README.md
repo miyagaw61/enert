@@ -68,6 +68,8 @@ cmd.call()
 stdout_str, stderr_str = cmd.get()
 ```
 
+## その他
+
 * 文字に色を付与
 ```python
 red_hoge = red("hoge")
