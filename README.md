@@ -90,17 +90,29 @@ cmd.call()
 stdout_str, stderr_str = cmd.get()
 ```
 
+## menuクラス
+```python
+lst = ["1. hogehoge", "2. fugafuga", "3. piyopiyo"]
+def function(i):
+    m.exit_menu()
+    print(lst[i])
+    exit()
+m = menu(lst, function)
+m.print_menu()
+```
+
 ## その他
 
 * 文字に色を付与
 ```python
 red_hoge = red("hoge")
 bold_green_fuga = green("hoge", "bold")
+background_black_fontcolor_white = black_white("hoge", "bold")
 ```
 
-* valueをs桁の2の補数表現で表現
+* valueをn桁の2の補数表現で表現
 ```python
-complement(value, s)
+complement(value, n)
 ```
 
 * 文字列strをn文字ごとにsplit
@@ -113,7 +125,7 @@ print(list) # -> ["hoge", "fuga", "piyo"]
 
 * ターミナルのサイズを取得
 ```python
-size_x, size_y = get_term_size()
+size_y, size_x = get_term_size()
 ```
 
 * clear(Ctrl+l)する
@@ -125,4 +137,18 @@ clear()
 ```python
 buf = "hoge"
 writefile(buf, "buf.txt")
+```
+
+* リアルタイムで文字を読み込む
+```python
+while 1:
+    key = getch()
+    if key:
+        if key == "q":
+            exit()
+        if ord(key) == 13:
+            print("ENTER!!!")
+        else:
+            print("hoge")
+
 ```
