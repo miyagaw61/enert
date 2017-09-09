@@ -17,7 +17,7 @@ Usage
 
 * import 
 ```python
-from enert.main import *
+from enert import *
 ```
 
 ## fileクラス

@@ -1,5 +1,4 @@
-import os, sys, subprocess, re, binascii
-from enert import config
+import os, sys, subprocess, re, binascii, fcntl, termios
 
 class file:
     def __init__(self, file_name):
@@ -67,7 +66,8 @@ def colorize(text, color=None, attrib=None):
     """
     # ansicolor definitions
     COLORS = {"black": "30", "red": "31", "green": "32", "yellow": "33",
-                "blue": "34", "purple": "35", "cyan": "36", "white": "37"}
+            "blue": "34", "purple": "35", "cyan": "36", "white": "37", 
+            "black_white": "40;37", "black_red": "40;31"}
     CATTRS = {"regular": "0", "bold": "1", "underline": "4", "strike": "9",
                 "light": "1", "dark": "2", "invert": "7"}
 
@@ -109,8 +109,59 @@ def cyan(text, attrib=None):
     return colorize(text, "cyan", attrib)
 
 def white(text, attrib=None):
-    """Wrapper for colorize(text, 'cyan')"""
+    """Wrapper for colorize(text, 'white')"""
     return colorize(text, "white", attrib)
+
+def black_white(text, attrib=None):
+    """Wrapper for colorize(text, 'black_white')"""
+    return colorize(text, "black_white", attrib)
+
+def black_red(text, attrib=None):
+    """Wrapper for colorize(text, 'black_red')"""
+    return colorize(text, "black_red", attrib)
+
+esc = "\033"
+csi = esc + "["
+def to(n=1):
+    sys.stdout.write(csi + str(n) + "G")
+    sys.stdout.flush()
+
+def all_delete():
+    sys.stdout.write(csi + "2K")
+    sys.stdout.write(csi + "1G")
+    sys.stdout.flush()
+
+def n2tail_delete(n):
+    to(str(n))
+    sys.stdout.write(csi + "0K")
+    sys.stdout.write(csi + "1G")
+    sys.stdout.flush()
+
+def head2n_delete(n):
+    to(str(n))
+    sys.stdout.write(csi + "1K")
+    sys.stdout.write(csi + "1G")
+    sys.stdout.flush()
+
+def down(n=1):
+    sys.stdout.write(csi + str(n) + "B")
+    sys.stdout.flush()
+
+def up(n=1):
+    sys.stdout.write(csi + str(n) + "A")
+    sys.stdout.flush()
+
+def overwrite(strings):
+    sys.stdout.write("\r")
+    sys.stdout.write(strings)
+
+def save():
+    sys.stdout.write(csi + "s")
+    sys.stdout.flush()
+
+def restore():
+    sys.stdout.write(csi + "u")
+    sys.stdout.flush()
 
 def get_term_size():
     return map(int, os.popen('stty size').read().split())
@@ -165,3 +216,72 @@ def complement(value, s):
         value = value - 1
         value = value ^ 2**s-1
         return 0-value
+
+def getch():
+    import sys, tty, termios
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
+
+class menu():
+    def __init__(self, lst, function):
+        self.i = 0
+        self.lst = lst
+        self.num = len(lst)
+        self.function = function
+        self.top = blue(">", "bold") + "  "
+        self.to = 3
+
+    def exit_menu(self):
+        restore()
+        to(1)
+        sys.stdout.write(csi + str(self.num) + "M")
+        all_delete()
+
+    def print_menu(self):
+        save()
+        sys.stdout.write(self.top)
+        print("")
+        for self.i in range(self.num):
+            if self.i == 0:
+                print(black_red("> ", "bold") + black_white(self.lst[self.i], "bold"))
+            else:
+                print("  " + self.lst[self.i])
+        self.i = 0
+        restore()
+        to(self.to)
+        while 1:
+            key = getch()
+            restore()
+            sys.stdout.write(self.top)
+            to(self.to)
+            if key == "j" and self.i < self.num-1:
+                down(self.i+1)
+                all_delete()
+                overwrite("  " + self.lst[self.i])
+                restore()
+                down(self.i+2)
+                overwrite(black_red("> ", "bold") + black_white(self.lst[self.i+1], "bold"))
+                restore()
+                to(3)
+                self.i = self.i + 1
+            if key == "k" and self.i >= 1:
+                down(self.i+1)
+                all_delete()
+                overwrite("  " + self.lst[self.i])
+                restore()
+                down(self.i)
+                overwrite(black_red("> ", "bold") + black_white(self.lst[self.i-1], "bold"))
+                restore()
+                to(3)
+                self.i = self.i -1
+            elif key == "q":
+                self.exit_menu()
+                exit()
+            elif ord(key) == 13:
+                self.function(self.i)
