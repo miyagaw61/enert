@@ -235,6 +235,7 @@ writefile(buf, "buf.txt")
 while 1:
     key = getch()
     if key == "q":
+        print("Exit.")
         exit()
     elif ord(key) == ENTER:
         print("ENTER!!!")
