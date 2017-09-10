@@ -234,12 +234,11 @@ writefile(buf, "buf.txt")
 ```python
 while 1:
     key = getch()
-    if key:
-        if key == "q":
-            exit()
-        if ord(key) == 13:
-            print("ENTER!!!")
-        else:
-            print("hoge")
+    if key == "q":
+        exit()
+    elif ord(key) == ENTER:
+        print("ENTER!!!")
+    elif key:
+        print(key)
 
 ```
