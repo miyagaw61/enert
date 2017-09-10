@@ -249,7 +249,6 @@ class menu():
         all_delete()
 
     def menu_start(self):
-        save()
         sys.stdout.write(self.top)
         print("")
         for self.i in range(self.num):
@@ -258,7 +257,8 @@ class menu():
             else:
                 print("  " + self.lst[self.i])
         self.i = 0
-        restore()
+        up(self.num+1)
+        save()
         to(self.to)
         while 1:
             key = getch()
