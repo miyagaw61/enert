@@ -25,68 +25,68 @@ from enert import *
 file_name = "a.out"
 f = file(file_name)
 ```
-- f.edit()
-```
-編集
-```
-
-- f.lines()
-```
-行数取得
+- 編集
+```python
+f.edit()
 ```
 
-- f.data()
-```
-データ読み込み
-```
-
-- f.linedata()
-```
-行ごとに読み込み
+- 行数取得
+```python
+f.lines()
 ```
 
-- f.write("hoge\n")
-```
-書き込み
-```
-
-- f.add("hoge\n")
-```
-追記
+- データ読み込み
+```python
+f.data()
 ```
 
-- f.exist()
-```
-存在するかどうか調査
-```
-
-- f.rm()
-```
-削除
+- 行ごとに読み込み
+```python
+f.linedata()
 ```
 
-- f.binary()
-```
-バイナリとして読み込み
+- 書き込み
+```python
+f.write("hoge\n")
 ```
 
-- f.binary(n)
+- 追記
+```python
+f.add("hoge\n")
 ```
-バイナリをn文字ごとにsplitしてリスト化して読み込み
+
+- 存在するかどうか調査
+```python
+f.exist()
+```
+
+- 削除
+```python
+f.rm()
+```
+
+- バイナリとして読み込み
+```python
+f.binary()
+```
+
+- バイナリをn文字ごとにsplitしてリスト化して読み込み
+```python
+f.binary(n)
 ```
 
 ## shellクラス
 ```python
 cmd = shell("ls | grep *.txt")
 ```
-- cmd.call()
-```
-コマンド実行
+- コマンド実行
+```python
+cmd.call()
 ```
 
-- stdout_str, stderr_str = cmd.get()
-```
-コマンドの出力を取得
+- コマンドの出力を取得
+```python
+stdout_str, stderr_str = cmd.get()
 ```
 
 ## menuクラス
@@ -105,54 +105,54 @@ m.menu_start()
 
 ## 制御関数群
 ターミナルを制御する関数群
-* up(n)
-```
-カーソルをn文字上へ移動
-```
-
-* down(n)
-```
-カーソルをn文字下へ移動
+* カーソルをn文字上へ移動
+```python
+up(n)
 ```
 
-* to(n)
-```
-カーソルをn桁目へ移動
-```
-
-* save()
-```
-現在のカーソルの位置を保存
+* カーソルをn文字下へ移動
+```python
+down(n)
 ```
 
-* restore()
-```
-保存したカーソルの位置を復元
-```
-
-* all_delete()
-```
-現在の行をすべてクリア
+* カーソルをn桁目へ移動
+```python
+to(n)
 ```
 
-* head2n_delete(n)
-```
-現在の行の先頭からn桁目までをクリア
-```
-
-* n2tail_delete()
-```
-現在の行のn桁目から行末までをクリア
+* 現在のカーソルの位置を保存
+```python
+save()
 ```
 
-* lines_delete(n)
-```
-現在の行からn行下までクリア
+* 保存したカーソルの位置を復元
+```python
+restore()
 ```
 
-* clear()
+* 現在の行をすべてクリア
+```python
+all_delete()
 ```
-clear(Ctrl+l)する
+
+* 現在の行の先頭からn桁目までをクリア
+```python
+head2n_delete(n)
+```
+
+* 現在の行のn桁目から行末までをクリア
+```python
+n2tail_delete()
+```
+
+* 現在の行からn行下までクリア
+```python
+lines_delete(n)
+```
+
+* clear(Ctrl+l)する
+```python
+clear()
 ```
 
 ## screenクラス
