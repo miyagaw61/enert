@@ -157,6 +157,18 @@ clear()
 
 ## screenクラス
 制御関数と組み合わせて独自のmenuを作成する際に便利です。
+
+* 原点を作成
+```python
+s = screen()
+```
+
+* 原点を元にした座標に出力
+```python
+s.print(x, y, strings)
+```
+
+* example
 ```python
 from enert import *
 
