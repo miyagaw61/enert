@@ -1,4 +1,15 @@
 import os, sys, subprocess, re, binascii, fcntl, termios
+ENTER = 13
+UP = 65
+DOWN = 66
+LEFT = 68
+RIGHT = 67
+CTRL_C = 3
+CTRL_D = 4
+CTRL_J = 10
+CTRL_K = 11
+CTRL_H = 8
+CTRL_L = 12
 
 class file:
     def __init__(self, file_name):
@@ -163,6 +174,9 @@ def restore():
     sys.stdout.write(csi + "u")
     sys.stdout.flush()
 
+def lines_delete(n):
+    sys.stdout.write(csi + str(n) + "M")
+
 def get_term_size():
     return map(int, os.popen('stty size').read().split())
 
@@ -228,6 +242,17 @@ def getch():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
+class screen():
+    def __init__(self):
+        save()
+
+    def print(self, x, y, strings):
+        restore()
+        down(y)
+        to(x)
+        sys.stdout.write(strings)
+        restore()
+
 class menu():
     def __init__(self, lst, function):
         self.i = 0
@@ -236,17 +261,11 @@ class menu():
         self.function = function
         self.top = blue(">", "bold") + "  "
         self.to = 3
-        self.ENTER = 13
-        self.CTRL_C = 3
-        self.CTRL_D = 4
-        self.UP = 65
-        self.DOWN = 66
 
     def menu_exit(self):
         restore()
         to(1)
-        sys.stdout.write(csi + str(self.num) + "M")
-        all_delete()
+        lines_delete(100)
 
     def menu_start(self):
         sys.stdout.write(self.top)
@@ -265,7 +284,7 @@ class menu():
             restore()
             sys.stdout.write(self.top)
             to(self.to)
-            if (key == "j" or ord(key) == self.DOWN) and self.i < self.num-1:
+            if (key == "j" or ord(key) == DOWN) and self.i < self.num-1:
                 down(self.i+1)
                 all_delete()
                 overwrite("  " + self.lst[self.i])
@@ -275,7 +294,7 @@ class menu():
                 restore()
                 to(3)
                 self.i = self.i + 1
-            if (key == "k" or ord(key) == self.UP) and self.i >= 1:
+            if (key == "k" or ord(key) == UP) and self.i >= 1:
                 down(self.i+1)
                 all_delete()
                 overwrite("  " + self.lst[self.i])
@@ -285,8 +304,8 @@ class menu():
                 restore()
                 to(3)
                 self.i = self.i -1
-            elif key == "q" or ord(key) == self.CTRL_C or ord(key) == self.CTRL_D:
+            elif key == "q" or ord(key) == CTRL_C or ord(key) == CTRL_D:
                 self.menu_exit()
                 exit()
-            elif ord(key) == self.ENTER:
+            elif ord(key) == ENTER:
                 self.function(self.i)

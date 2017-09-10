@@ -25,72 +25,72 @@ from enert import *
 file_name = "a.out"
 f = file(file_name)
 ```
-- 編集
-```python
-f.edit()
+- f.edit()
+```
+編集
 ```
 
-- 行数取得
-```python
-f.lines()
+- f.lines()
+```
+行数取得
 ```
 
-- データ読み込み
-```python
-f.data()
+- f.data()
+```
+データ読み込み
 ```
 
-- 行ごとに読み込み
-```python
-f.linedata()
+- f.linedata()
+```
+行ごとに読み込み
 ```
 
-- 書き込み
-```python
-f.write("hoge\n")
+- f.write("hoge\n")
+```
+書き込み
 ```
 
-- 追記
-```python
-f.add("hoge\n")
+- f.add("hoge\n")
+```
+追記
 ```
 
-- 存在するかどうか調査
-```python
-f.exist()
+- f.exist()
+```
+存在するかどうか調査
 ```
 
-- 削除
-```python
-f.rm()
+- f.rm()
+```
+削除
 ```
 
-- バイナリとして読み込み
-```python
-f.binary()
+- f.binary()
+```
+バイナリとして読み込み
 ```
 
-- バイナリをfmt文字ごとにsplitしてリスト化して読み込み
-```python
-fmt = 16
-f.binary(fmt)
+- f.binary(n)
+```
+バイナリをn文字ごとにsplitしてリスト化して読み込み
 ```
 
 ## shellクラス
 ```python
 cmd = shell("ls | grep *.txt")
 ```
-- コマンド実行
-```python
-cmd.call()
+- cmd.call()
+```
+コマンド実行
 ```
 
-- コマンドの出力を取得
-```python
-stdout_str, stderr_str = cmd.get()
+- stdout_str, stderr_str = cmd.get()
+```
+コマンドの出力を取得
 ```
 
 ## menuクラス
+手軽にmenuが作成できる。
 ```python
 lst = ["1. hogehoge", "2. fugafuga", "3. piyopiyo"]
 def function(i):
@@ -103,8 +103,102 @@ print('Please input "j" or "k" or "Enter".')
 m.menu_start()
 ```
 
-## その他
+## 制御関数群
+ターミナルを制御する関数群
+* up(n)
+```
+カーソルをn文字上へ移動
+```
 
+* down(n)
+```
+カーソルをn文字下へ移動
+```
+
+* to(n)
+```
+カーソルをn桁目へ移動
+```
+
+* save()
+```
+現在のカーソルの位置を保存
+```
+
+* restore()
+```
+保存したカーソルの位置を復元
+```
+
+* all_delete()
+```
+現在の行をすべてクリア
+```
+
+* head2n_delete(n)
+```
+現在の行の先頭からn桁目までをクリア
+```
+
+* n2tail_delete()
+```
+現在の行のn桁目から行末までをクリア
+```
+
+* lines_delete(n)
+```
+現在の行からn行下までクリア
+```
+
+* clear()
+```
+clear(Ctrl+l)する
+```
+
+## screenクラス
+制御関数と組み合わせて独自のmenuを作成する際に便利です。
+```python
+from enert import *
+
+lst = ["hogehoge", "fugafugafugafuga", "piyopiyopiyo"]
+sys.stdout.write("Your Choise : ")
+s = screen()
+print("\n====================")
+print(black_red("> ", "bold") + black_white(lst[0], "bold"))
+print("  " + lst[1])
+print("  " + lst[2])
+print("====================")
+i = 0
+header = 2
+footer = 1
+up(header+len(lst)+footer)
+sys.stdout.write("Your Choise : ")
+save()
+while 1:
+    key = getch()
+    if (key == "j" or ord(key) == DOWN) and i < len(lst)-1:
+        old = i
+        i = i + 1
+        s.print(1, header+old, "  " + lst[old])
+        s.print(1, header+i, black_red("> ", "bold") + black_white(lst[i], "bold"))
+    elif (key == "k" or ord(key) == UP) and i > 0:
+        old = i
+        i = i - 1
+        s.print(1, header+old, "  " + lst[old])
+        s.print(1, header+i, black_red("> ", "bold") + black_white(lst[i], "bold"))
+    elif ord(key) == ENTER:
+        restore()
+        all_delete()
+        sys.stdout.write("Your Choise : ")
+        sys.stdout.write(lst[i])
+        save()
+        sys.stdout.flush()
+    elif key == "q" or ord(key) == CTRL_C or ord(key) == CTRL_D:
+        lines_delete(100)
+        exit()
+```
+
+## その他
 * 文字に色を付与
 ```python
 red_hoge = red("hoge")
@@ -128,11 +222,6 @@ print(list) # -> ["hoge", "fuga", "piyo"]
 * ターミナルのサイズを取得
 ```python
 size_y, size_x = get_term_size()
-```
-
-* clear(Ctrl+l)する
-```python
-clear()
 ```
 
 * 文字列をファイルに書き込む
