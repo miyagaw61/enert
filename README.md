@@ -94,11 +94,13 @@ stdout_str, stderr_str = cmd.get()
 ```python
 lst = ["1. hogehoge", "2. fugafuga", "3. piyopiyo"]
 def function(i):
-    m.exit_menu()
+    m.menu_exit()
     print(lst[i])
     exit()
 m = menu(lst, function)
-m.print_menu()
+
+print('Please input "j" or "k" or "Enter".')
+m.menu_start()
 ```
 
 ## その他

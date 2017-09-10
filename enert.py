@@ -236,14 +236,19 @@ class menu():
         self.function = function
         self.top = blue(">", "bold") + "  "
         self.to = 3
+        self.ENTER = 13
+        self.CTRL_C = 3
+        self.CTRL_D = 4
+        self.UP = 65
+        self.DOWN = 66
 
-    def exit_menu(self):
+    def menu_exit(self):
         restore()
         to(1)
         sys.stdout.write(csi + str(self.num) + "M")
         all_delete()
 
-    def print_menu(self):
+    def menu_start(self):
         save()
         sys.stdout.write(self.top)
         print("")
@@ -260,7 +265,7 @@ class menu():
             restore()
             sys.stdout.write(self.top)
             to(self.to)
-            if key == "j" and self.i < self.num-1:
+            if (key == "j" or ord(key) == self.DOWN) and self.i < self.num-1:
                 down(self.i+1)
                 all_delete()
                 overwrite("  " + self.lst[self.i])
@@ -270,7 +275,7 @@ class menu():
                 restore()
                 to(3)
                 self.i = self.i + 1
-            if key == "k" and self.i >= 1:
+            if (key == "k" or ord(key) == self.UP) and self.i >= 1:
                 down(self.i+1)
                 all_delete()
                 overwrite("  " + self.lst[self.i])
@@ -280,8 +285,8 @@ class menu():
                 restore()
                 to(3)
                 self.i = self.i -1
-            elif key == "q":
-                self.exit_menu()
+            elif key == "q" or ord(key) == self.CTRL_C or ord(key) == self.CTRL_D:
+                self.menu_exit()
                 exit()
-            elif ord(key) == 13:
+            elif ord(key) == self.ENTER:
                 self.function(self.i)
