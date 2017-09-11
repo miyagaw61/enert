@@ -246,7 +246,7 @@ class screen():
     def __init__(self):
         save()
 
-    def print(self, x, y, strings):
+    def addstr(self, x, y, strings):
         restore()
         down(y)
         to(x)
