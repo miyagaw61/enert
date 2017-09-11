@@ -165,7 +165,7 @@ s = screen()
 
 * 原点を元にした座標に出力
 ```python
-s.print(x, y, strings)
+s.addstr(x, y, strings)
 ```
 
 * example
@@ -191,13 +191,13 @@ while 1:
     if (key == "j" or ord(key) == DOWN) and i < len(lst)-1:
         old = i
         i = i + 1
-        s.print(1, header+old, "  " + lst[old])
-        s.print(1, header+i, black_red("> ", "bold") + black_white(lst[i], "bold"))
+        s.addstr(1, header+old, "  " + lst[old])
+        s.addstr(1, header+i, black_red("> ", "bold") + black_white(lst[i], "bold"))
     elif (key == "k" or ord(key) == UP) and i > 0:
         old = i
         i = i - 1
-        s.print(1, header+old, "  " + lst[old])
-        s.print(1, header+i, black_red("> ", "bold") + black_white(lst[i], "bold"))
+        s.addstr(1, header+old, "  " + lst[old])
+        s.addstr(1, header+i, black_red("> ", "bold") + black_white(lst[i], "bold"))
     elif ord(key) == ENTER:
         restore()
         all_delete()
