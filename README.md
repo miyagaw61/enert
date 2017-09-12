@@ -163,6 +163,11 @@ clear()
 s = screen()
 ```
 
+* 原点を更新
+```python
+save()
+```
+
 * 原点を元にした座標に出力
 ```python
 s.addstr(x, y, strings)
