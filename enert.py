@@ -274,7 +274,7 @@ class menu():
             if self.i == 0:
                 print(black_red("> ", "bold") + black_white(self.lst[self.i], "bold"))
             else:
-                print("  " + self.lst[self.i])
+                print(black_white(" ") +  " " + self.lst[self.i])
         self.i = 0
         up(self.num+1)
         save()
@@ -287,7 +287,7 @@ class menu():
             if (key == "j" or ord(key) == DOWN) and self.i < self.num-1:
                 down(self.i+1)
                 all_delete()
-                overwrite("  " + self.lst[self.i])
+                overwrite(black_white(" ") + " " + self.lst[self.i])
                 restore()
                 down(self.i+2)
                 overwrite(black_red("> ", "bold") + black_white(self.lst[self.i+1], "bold"))
@@ -297,7 +297,7 @@ class menu():
             if (key == "k" or ord(key) == UP) and self.i >= 1:
                 down(self.i+1)
                 all_delete()
-                overwrite("  " + self.lst[self.i])
+                overwrite(black_white(" ") + " " + self.lst[self.i])
                 restore()
                 down(self.i)
                 overwrite(black_red("> ", "bold") + black_white(self.lst[self.i-1], "bold"))
@@ -309,3 +309,4 @@ class menu():
                 exit()
             elif ord(key) == ENTER:
                 self.function(self.i)
+
