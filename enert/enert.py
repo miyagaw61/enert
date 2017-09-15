@@ -86,10 +86,6 @@ class shell:
         os.system(self.cmd)
 
 def colorize(text, color=None, attrib=None):
-    """
-    Colorize text using ansicolor
-    ref: https://github.com/hellman/libcolors/blob/master/libcolors.py
-    """
     # ansicolor definitions
     COLORS = {"black": "30", "red": "31", "green": "32", "yellow": "33",
             "blue": "34", "purple": "35", "cyan": "36", "white": "37", 
@@ -111,43 +107,33 @@ def colorize(text, color=None, attrib=None):
     return CPRE + ccode + "m" + text + CSUF
 
 def green(text, attrib=None):
-    """Wrapper for colorize(text, 'green')"""
     return colorize(text, "green", attrib)
 
 def red(text, attrib=None):
-    """Wrapper for colorize(text, 'red')"""
     return colorize(text, "red", attrib)
 
 def yellow(text, attrib=None):
-    """Wrapper for colorize(text, 'yellow')"""
     return colorize(text, "yellow", attrib)
 
 def blue(text, attrib=None):
-    """Wrapper for colorize(text, 'blue')"""
     return colorize(text, "blue", attrib)
 
 def purple(text, attrib=None):
-    """Wrapper for colorize(text, 'purple')"""
     return colorize(text, "purple", attrib)
 
 def cyan(text, attrib=None):
-    """Wrapper for colorize(text, 'cyan')"""
     return colorize(text, "cyan", attrib)
 
 def white(text, attrib=None):
-    """Wrapper for colorize(text, 'white')"""
     return colorize(text, "white", attrib)
 
 def black_white(text, attrib=None):
-    """Wrapper for colorize(text, 'black_white')"""
     return colorize(text, "black_white", attrib)
 
 def black_red(text, attrib=None):
-    """Wrapper for colorize(text, 'black_red')"""
     return colorize(text, "black_red", attrib)
 
 def black_green(text, attrib=None):
-    """Wrapper for colorize(text, 'black_green')"""
     return colorize(text, "black_green", attrib)
 
 esc = "\033"
