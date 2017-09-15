@@ -7,10 +7,9 @@ install
 =======
 
 ```bash
-mkdir /hoge  
-git clone https://github.com/miyagaw61/enert /hoge/enert    
-export PYTHONPATH=$PYTHONPATH:/hoge
+pip install "git+https://github.com/miyagaw61/enert.git#egg=enert"
 ```
+
 
 Usage
 =====
