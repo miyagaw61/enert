@@ -1,5 +1,6 @@
 import os, sys, subprocess, re, binascii, fcntl, termios
 ENTER = 13
+SPACE = 32
 UP = 65
 DOWN = 66
 LEFT = 68
@@ -10,10 +11,14 @@ CTRL_J = 10
 CTRL_K = 11
 CTRL_H = 8
 CTRL_L = 12
+CTRL_S = 19
 
 class file:
     def __init__(self, file_name):
         self.name = file_name
+
+    def name(self):
+        return self.name
 
     def data(self):
         return open(self.name).read()
@@ -64,11 +69,14 @@ class shell:
                 stdout = subprocess.PIPE,
                 stderr = subprocess.PIPE)
         stdout_str, stderr_str = proc.communicate()
-        return [stdout_str.decode(), stderr_str.decode()]
+        #if type(stdout_str) == bytes:
+        #    stdout_str = stdout_str.decode()
+        #if type(stderr_str) == bytes:
+        #    stderr_str = stderr_str.decode()
+        return [stdout_str, stderr_str]
 
     def call(self):
-        cmd = self.cmd.split()
-        subprocess.call(cmd)
+        os.system(self.cmd)
 
 def colorize(text, color=None, attrib=None):
     """
@@ -78,7 +86,7 @@ def colorize(text, color=None, attrib=None):
     # ansicolor definitions
     COLORS = {"black": "30", "red": "31", "green": "32", "yellow": "33",
             "blue": "34", "purple": "35", "cyan": "36", "white": "37", 
-            "black_white": "40;37", "black_red": "40;31"}
+            "black_white": "40;37", "black_red": "40;31", "black_green": "40;32"}
     CATTRS = {"regular": "0", "bold": "1", "underline": "4", "strike": "9",
                 "light": "1", "dark": "2", "invert": "7"}
 
@@ -130,6 +138,10 @@ def black_white(text, attrib=None):
 def black_red(text, attrib=None):
     """Wrapper for colorize(text, 'black_red')"""
     return colorize(text, "black_red", attrib)
+
+def black_green(text, attrib=None):
+    """Wrapper for colorize(text, 'black_green')"""
+    return colorize(text, "black_green", attrib)
 
 esc = "\033"
 csi = esc + "["
@@ -207,6 +219,12 @@ def splitn(data, n):
     length = len(data)
     return [data[i:i+n] for i in range(0, length, n)]
 
+def diff(a, b):
+    if a > b:
+        return a - b
+    else:
+        return b - a
+
 def dmp(binary, fmt=None):
     """
         Usage: dmp(bin binary, split=""/"x"/"d")
@@ -250,6 +268,14 @@ class screen():
         restore()
         down(y)
         to(x)
+        sys.stdout.write(strings)
+        restore()
+
+    def overwrite(self, x, y, strings):
+        restore()
+        down(y)
+        to(x)
+        all_delete()
         sys.stdout.write(strings)
         restore()
 
