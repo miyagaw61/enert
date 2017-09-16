@@ -1,2 +1,2 @@
 from enert.enert import *
-from enert.colorize import *
+from enert.colorize.colorize import *
