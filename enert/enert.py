@@ -2,7 +2,7 @@
 #
 #       Copyright (C) 2017 Taisei Miyagawa <Twitter: @miyagaw61, WebPage: miyagaw61.github.io>
 #
-#       License: GPL-3.0
+#       License: MIT
 
 import os, sys, subprocess, re, binascii, fcntl, termios
 

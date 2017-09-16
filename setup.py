@@ -8,5 +8,5 @@ setup(
     author="Taisei Miyagawa <Twitter: @miyagaw61>",
     author_email="miyagaw61@gmail.com",
     url="https://github.com/miyagaw61/enert.git",
-    license="GPL-3.0"
+    license="MIT"
 )
