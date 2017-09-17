@@ -5,6 +5,7 @@
 #       License: MIT
 
 import os, sys, subprocess, re, binascii, fcntl, termios
+from appleparse import ArgumentParser
 
 argv = sys.argv
 argc = len(sys.argv)
@@ -282,3 +283,51 @@ class menu():
             elif ord(key) == ENTER:
                 self.function(self.i)
 
+
+def parse_usage(usage, args):
+    """
+    Usage: parse_usage(usage, args)
+    Example usage: 'git [commit <-m>] [push <branch>]'
+    Example args: ['commit [-m <comment>]:commit to local repository', 'push [branch]:push to remote repository']
+    """
+    argparser = ArgumentParser(usage=usage)
+    for x in args:
+        argparser.add_argument(x.split(':')[0], type=str, help=x.split(':')[1])
+    tmp_args = argv
+    tmp_args.append('-h')
+    args = argparser.parse_args(tmp_args)
+
+def list_check(listA, listB):
+    """
+    a = [1, 2, 3]
+    b = [4, 5, 6]
+    list_check(a, b) == 0
+    b = [3, 4, 5]
+    list_check(a, b) == 1
+    """
+    ans = 0
+    for A in listA:
+        for B in listB:
+            if A == B:
+                ans = 1
+    return ans
+
+def help_check(lst=None, idx=None):
+    """
+    Usage: help_check()
+    Usage: help_check(lst, idx)
+    Example: help_check(argv[2:]) #check argv[2:] in '-h' or '--help'
+    Example: help_check(argv[2:], 3) # check argc < 3
+    """
+    if lst == None:
+        lst = argv
+    if '-h' in lst or '--help' in lst:
+        return 1
+    else:
+        if idx:
+            if argc < idx:
+                return 1
+            else:
+                return 0
+        else:
+            return 0
