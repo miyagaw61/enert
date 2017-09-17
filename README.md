@@ -226,10 +226,10 @@ complement(value, n)
 
 * 文字列strをn文字ごとにsplit
 ```python
-str = "hogefugapiyo"
+strings = "hogefugapiyo"
 n = 4
-list = splitn(str, n)
-print(list) # -> ["hoge", "fuga", "piyo"]
+lst = splitn(strings, n)
+print(lst) # -> ["hoge", "fuga", "piyo"]
 ```
 
 * ターミナルのサイズを取得
