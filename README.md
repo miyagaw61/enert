@@ -9,7 +9,6 @@
 pip install "git+https://github.com/miyagaw61/enert.git#egg=enert"
 ```
 
-
 # Usage
 
 * import 
@@ -256,4 +255,26 @@ while 1:
     elif key:
         print(key)
 
+```
+
+* Usageをパースして表示
+これを使えば、サブコマンド形式とオプション形式をどちらも採用しているスクリプトを簡単に作ることができる。(サブコマンド形式のルーチンのみこのコマンドを使用)
+```python
+Usage: parse_usage(str usage, list args)
+Example usage: 'git [commit <-m>] [push <branch>]'
+Example args: ['commit [-m <comment>]:commit to local repository', 'push [branch]:push to remote repository']
+```
+
+* リスト二つを比較して、一致するものが一つでもあるかどうかを調査
+一致するものが一つでもあれば1を返す。
+```python
+list_check(listA, listB)
+```
+
+* helpを表示すべきかどうか調査
+lstの中に-hもしくは--helpが存在すれば1を返す。また、argc < idxを満たせば1を返す。
+```python
+help() -> help(lst=argv, idx=None)
+help(lst=lstA) -> help(lst=lstA, idx=None)
+help(idx=3) -> help(lst=argv, idx=3)
 ```
