@@ -6,6 +6,9 @@
 
 import os, sys, subprocess, re, binascii, fcntl, termios
 
+argv = sys.argv
+argc = len(sys.argv)
+
 ENTER = 13
 SPACE = 32
 UP = 65
