@@ -5,6 +5,8 @@
 #       License: MIT
 
 import os, sys, subprocess, re, binascii, fcntl, termios
+argv = sys.argv
+argc = len(argv)
 
 ENTER = 13
 SPACE = 32
