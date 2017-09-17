@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="enert",
-    version="0.0.1",
+    version="0.0.2",
     packages=find_packages(),
     description="miyagaw61's python library",
     author="Taisei Miyagawa <miyagaw61 at miyagaw61.github.io>",
