@@ -5,6 +5,8 @@
 #       License: MIT
 
 import os, sys, subprocess, re, binascii, fcntl, termios
+from argparse import ArgumentParser
+
 argv = sys.argv
 argc = len(argv)
 
