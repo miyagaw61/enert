@@ -1,1 +1,6 @@
-pip install --upgrade "git+https://github.com/miyagaw61/enert#egg=enert"
+#!/bin/sh
+if test $# -eq 0 ;then
+    pip install --upgrade "git+https://github.com/miyagaw61/enert#egg=enert"
+elif test "$1" = "develop" ;then
+    pip install --upgrade "git+https://github.com/miyagaw61/enert@develop#egg=enert"
+fi
