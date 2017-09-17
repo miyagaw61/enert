@@ -1,0 +1,59 @@
+#!/home/miyagaw61/.pyenv/shims/python
+from enert import *
+
+main_usage  = 'example_script [2] [3] [hoge <4> <5> <fuga>]'
+main_args   = ['2:print 2', '3:print 3', 'hoge [fuga]:HOGE']
+hoge_usage  = 'example_script hoge [4] [5] [hoge <message>]'
+hoge_args   = ['4:print 4', '5:print 5', 'fuga [message]:FUGA']
+final_usage = 'example_script hoge hoge [message]'
+final_args  = ['message:HOGE message']
+
+def pattern_2():
+    print('2')
+
+def pattern_3():
+    print('3')
+
+def pattern_4():
+    argparser = ArgumentParser(usage='example_script hoge 4 [-a|--aaa] [-b|--bbb <message>]')
+    argparser.add_argument('-a', '--aaa', action='store_true', help='-a option\'s help')
+    argparser.add_argument('-b', '--bbb', dest='var_b', help='-b option\'s help')
+    args = argparser.parse_args(argv[3:])
+    if args.aaa:
+        print('aaaaaaa!!!')
+    if args.var_b:
+        print('your ---bbb is '+ args.var_b + '!!!')
+
+def pattern_5():
+    print('5')
+
+def pattern_f():
+    if argc < 4:
+        parse_usage(final_usage, final_args)
+    elif help_check():
+        parse_usage(final_usage, final_args)
+    else:
+        print('yeaaaaah!!!! : ' + argv[3])
+
+def pattern_hoge():
+    if argc < 3:
+        parse_usage(hoge_usage, hoge_args)
+    elif argv[2] == '4':
+        pattern_4()
+    elif argv[2] == '5':
+        pattern_5()
+    elif argv[2] == 'fuga':
+        pattern_f()
+    else:
+        parse_usage(hoge_usage, hoge_args)
+
+if argc < 2:
+    parse_usage(main_usage, main_args)
+elif argv[1] == '2':
+    pattern_2()
+elif argv[1] == '3':
+    pattern_3()
+elif argv[1] == 'hoge':
+    pattern_hoge()
+else:
+    parse_usage(main_usage, main_args)
