@@ -283,6 +283,10 @@ class menu():
             elif ord(key) == ENTER:
                 self.function(self.i)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b9331c243b2d73f6a8b599ed83ebfe69c455e52a
 def parse_usage(usage, args):
     """
     Usage: parse_usage(usage, args)

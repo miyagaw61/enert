@@ -1,0 +1,1 @@
+pip install --upgrade "git+https://github.com/miyagaw61/enert#egg=enert"
