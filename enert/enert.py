@@ -12,6 +12,12 @@ argc = len(argv)
 regex_n = re.compile(r'\n')
 regex_s = re.compile(r' ')
 
+try:
+    if xrange:
+        python3 = False
+except:
+    python3 = True
+
 ENTER = 13
 SPACE = 32
 UP = 65
@@ -344,3 +350,4 @@ def help_check(lst=None, idx=None):
                 return 0
         else:
             return 0
+
