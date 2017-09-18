@@ -10,7 +10,7 @@ it covers. The few relevant pieces of code are all contained inside these
 directories:
 
 - enert/colorize
-
+- enert/argparse
 
 Copyright (c) 2017 Taisei Miyagawa
 Twitter: @miyagaw61
