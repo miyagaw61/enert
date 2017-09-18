@@ -363,3 +363,6 @@ def select_input(strings, lst):
             break
     return ans
 
+def list_print(lst):
+    for x in lst:
+        print(x)
