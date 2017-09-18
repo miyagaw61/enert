@@ -356,3 +356,10 @@ def help_check(lst=None, idx=None):
         else:
             return 0
 
+def select_input(strings, lst):
+    while 1:
+        ans = input(strings)
+        if ans in lst:
+            break
+    return ans
+
