@@ -15,8 +15,10 @@ regex_s = re.compile(r' ')
 try:
     if xrange:
         python3 = False
+        python2 = True
 except:
     python3 = True
+    python2 = False
 
 ENTER = 13
 SPACE = 32
