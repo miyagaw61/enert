@@ -339,7 +339,7 @@ def list_check(listA, listB):
                 ans = 1
     return ans
 
-def help_check(idx=None):
+def help_check(lst, idx=None):
     """
     Usage: help_check()
     Usage: help_check(lst, idx)
