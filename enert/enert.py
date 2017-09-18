@@ -40,7 +40,7 @@ CTRL_H = 8
 CTRL_L = 12
 CTRL_S = 19
 
-class file:
+class fl:
     def __init__(self, file_name):
         self.name = file_name
 
@@ -110,7 +110,7 @@ class shell:
 
     def linedata(self):
         stdout_str, stderr_str = self.data()
-        f = file('/tmp/enert.tmp')
+        f = fl('/tmp/enert.tmp')
         f.write(stdout_str)
         linedata = []
         linedata.append(f.linedata())

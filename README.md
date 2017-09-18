@@ -17,11 +17,11 @@ pip install "git+https://github.com/miyagaw61/enert.git#egg=enert"
 from enert import *
 ```
 
-## fileクラス
+## flクラス
 
 ```python
 file_name = "a.out"
-f = file(file_name)
+f = fl(file_name)
 ```
 - 編集
 
