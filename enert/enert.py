@@ -9,6 +9,8 @@ from argparse import ArgumentParser
 
 argv = sys.argv
 argc = len(argv)
+regex_n = re.compile(r'\n')
+regex_s = re.compile(r' ')
 
 ENTER = 13
 SPACE = 32
@@ -35,7 +37,10 @@ class file:
         return open(self.name).read()
     
     def linedata(self):
-        return open(self.name).readlines()
+        linedata = open(self.name).readlines()
+        for i in range(len(linedata)):
+            linedata[i] = regex_n.sub('', linedata[i])
+        return linedata
 
     def lines(self):
         return len(self.linedata())
@@ -89,6 +94,12 @@ class shell:
     def call(self):
         os.system(self.cmd)
 
+    def linedata(self):
+        stdout_str, stderr_str = self.data()
+        f = file('/tmp/enert.tmp')
+        f.write(stdout_str)
+        linedata = f.linedata()
+        return linedata
 
 esc = "\033"
 csi = esc + "["
