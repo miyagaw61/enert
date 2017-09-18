@@ -20,6 +20,9 @@ except:
     python3 = True
     python2 = False
 
+if python2:
+    input = raw_input
+
 ENTER = 13
 SPACE = 32
 UP = 65
