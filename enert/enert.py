@@ -11,6 +11,7 @@ argv = sys.argv
 argc = len(argv)
 regex_n = re.compile(r'\n')
 regex_s = re.compile(r' ')
+regex_blankline = re.compile(r'^$')
 
 try:
     if xrange:
