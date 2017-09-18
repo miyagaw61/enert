@@ -344,7 +344,7 @@ def help_check(idx=None):
     Example: help_check(argv[2:]) #check argv[2:] in '-h' or '--help'
     Example: help_check(argv[2:], 3) # check argc < 3
     """
-    if '-h' in lst or '--help' in lst:
+    if '-h' in argv or '--help' in argv:
         return 1
     else:
         if idx:
