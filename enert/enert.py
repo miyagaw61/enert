@@ -367,3 +367,7 @@ def select_input(strings, lst):
 def list_print(lst):
     for x in lst:
         print(x)
+
+def b():
+    import pdb
+    pdb.set_trace()
