@@ -72,7 +72,7 @@ class shell:
     def __init__(self, cmd):
         self.cmd = cmd
 
-    def get(self):
+    def data(self):
         proc = subprocess.Popen(
                 self.cmd,
                 shell  = True,
@@ -80,10 +80,10 @@ class shell:
                 stdout = subprocess.PIPE,
                 stderr = subprocess.PIPE)
         stdout_str, stderr_str = proc.communicate()
-        #if type(stdout_str) == bytes:
-        #    stdout_str = stdout_str.decode()
-        #if type(stderr_str) == bytes:
-        #    stderr_str = stderr_str.decode()
+        if type(stdout_str) == bytes:
+            stdout_str = stdout_str.decode()
+        if type(stderr_str) == bytes:
+            stderr_str = stderr_str.decode()
         return [stdout_str, stderr_str]
 
     def call(self):
