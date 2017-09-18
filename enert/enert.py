@@ -337,15 +337,13 @@ def list_check(listA, listB):
                 ans = 1
     return ans
 
-def help_check(lst=None, idx=None):
+def help_check(idx=None):
     """
     Usage: help_check()
     Usage: help_check(lst, idx)
     Example: help_check(argv[2:]) #check argv[2:] in '-h' or '--help'
     Example: help_check(argv[2:], 3) # check argc < 3
     """
-    if lst == None:
-        lst = argv
     if '-h' in lst or '--help' in lst:
         return 1
     else:
