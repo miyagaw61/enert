@@ -98,7 +98,10 @@ class shell:
         stdout_str, stderr_str = self.data()
         f = file('/tmp/enert.tmp')
         f.write(stdout_str)
-        linedata = f.linedata()
+        linedata = []
+        linedata.append(f.linedata())
+        f.write(stderr_str)
+        linedata.append(f.linedata())
         return linedata
 
 esc = "\033"
