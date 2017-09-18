@@ -614,7 +614,7 @@ class HelpFormatter(object):
             pass
         else:
             self._indent()
-            yield from get_subactions()
+            #yield from get_subactions()
             self._dedent()
 
     def _split_lines(self, text, width):
