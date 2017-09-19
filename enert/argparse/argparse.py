@@ -614,8 +614,7 @@ class HelpFormatter(object):
             pass
         else:
             self._indent()
-            if python3:
-                yield from get_subactions()
+            yield from get_subactions()
             self._dedent()
 
     def _split_lines(self, text, width):
@@ -2483,3 +2482,4 @@ class ArgumentParser(_AttributeHolder, _ActionsContainer):
         self.print_usage(_sys.stderr)
         args = {'prog': self.prog, 'message': message}
         self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+
