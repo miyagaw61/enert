@@ -1,4 +1,4 @@
-from toplevel import *
+from .toplevel import *
 
 def inf(strings, color="green"):
     term_y, term_x = get_term_size()
