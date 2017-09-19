@@ -1,6 +1,6 @@
 from .toplevel import *
 
-def mkparser(usage, lst):
+def mkparser(usage):
     """
     parser = mkparser(usage)
     parser.add_argument('command', choices=lst)
