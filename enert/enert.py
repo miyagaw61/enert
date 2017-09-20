@@ -106,7 +106,11 @@ class shell:
         return [stdout_str, stderr_str]
 
     def call(self):
-        os.system(self.cmd)
+        #os.system(self.cmd)
+        proc = subprocess.Popen(
+                self.cmd,
+                shell  = True)
+        proc.communicate()
 
     def linedata(self):
         stdout_str, stderr_str = self.data()
