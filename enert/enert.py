@@ -6,8 +6,6 @@
 
 import os, sys, subprocess, re, binascii, fcntl, termios
 from .toplevel import *
-import better_exceptions
-better_exceptions.MAX_LENGTH = None
 
 argv = sys.argv
 argc = len(argv)
