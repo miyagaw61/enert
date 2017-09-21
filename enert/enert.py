@@ -49,7 +49,7 @@ class fl:
         if os.path.exists(self.name):
             return open(self.name).read()
         else:
-            return None
+            return ""
     
     def linedata(self):
         if os.path.exists(self.name):
@@ -58,13 +58,13 @@ class fl:
                 linedata[i] = regex_n.sub('', linedata[i])
             return linedata
         else:
-            return None
+            return ""
 
     def lines(self):
         if os.path.exists(self.name):
             return len(self.linedata())
         else:
-            return None
+            return ""
 
     def write(self, data):
         fd = open(self.name, "w")
@@ -96,7 +96,7 @@ class fl:
             binary_data = open(self.name, "rb").read()
             return dmp(binary_data, fmt)
         else:
-            return None
+            return ""
 
 class shell:
     def __init__(self, cmd):
