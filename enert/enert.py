@@ -46,16 +46,25 @@ class fl:
         return self.name
 
     def data(self):
-        return open(self.name).read()
+        if os.path.exists(self.name):
+            return open(self.name).read()
+        else:
+            return None
     
     def linedata(self):
-        linedata = open(self.name).readlines()
-        for i in range(len(linedata)):
-            linedata[i] = regex_n.sub('', linedata[i])
-        return linedata
+        if os.path.exists(self.name):
+            linedata = open(self.name).readlines()
+            for i in range(len(linedata)):
+                linedata[i] = regex_n.sub('', linedata[i])
+            return linedata
+        else:
+            return None
 
     def lines(self):
-        return len(self.linedata())
+        if os.path.exists(self.name):
+            return len(self.linedata())
+        else:
+            return None
 
     def write(self, data):
         fd = open(self.name, "w")
@@ -83,8 +92,11 @@ class fl:
         subprocess.call(cmd)
 
     def binary(self, fmt="default"):
-        binary_data = open(self.name, "rb").read()
-        return dmp(binary_data, fmt)
+        if os.path.exists(self.name):
+            binary_data = open(self.name, "rb").read()
+            return dmp(binary_data, fmt)
+        else:
+            return None
 
 class shell:
     def __init__(self, cmd):
