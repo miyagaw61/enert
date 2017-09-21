@@ -71,7 +71,8 @@ class fl:
         return os.path.exists(self.name)
 
     def rm(self):
-        os.unlink(self.name)
+        if os.path.exists(self.name):
+            os.unlink(self.name)
 
     def edit(self):
         editor = "vi"
