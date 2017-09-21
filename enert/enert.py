@@ -131,6 +131,7 @@ class shell:
         linedata.append(f.linedata())
         f.write(stderr_str)
         linedata.append(f.linedata())
+        f.rm()
         return linedata
 
 esc = "\033"
