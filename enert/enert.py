@@ -60,6 +60,25 @@ class fl:
         else:
             return ""
 
+    def white_data(self):
+        regex_color = re.compile(r"\x1b.*?m")
+        if os.path.exists(self.name):
+            data = open(self.name).read()
+            return regex_color.sub("", data)
+        else:
+            return ""
+
+    def white_linedata(self):
+        regex_color = re.compile(r"\x1b.*?m")
+        if os.path.exists(self.name):
+            linedata = open(self.name).readlines()
+            for i in range(len(linedata)):
+                linedata[i] = regex_n.sub('', linedata[i])
+                linedata[i] = regex_color.sub("", linedata[i])
+            return linedata
+        else:
+            return ""
+
     def lines(self):
         if os.path.exists(self.name):
             return len(self.linedata())
