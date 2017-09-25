@@ -41,10 +41,20 @@ f.lines()
 f.data()
 ```
 
-- 行ごとに読み込み
+- データを行ごとに読み込み
 
 ```python
 f.linedata()
+```
+
+- 制御文字を削除してデータ読み込み
+```python
+f.white_data()
+```
+
+- 制御文字を削除してデータを行ごとに読み込み
+```python
+f.white_linedata()
 ```
 
 - 書き込み
