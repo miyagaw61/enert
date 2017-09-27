@@ -425,3 +425,65 @@ def inf(data, color="green"):
         print(data)
         print(blue("="*term_x + "\n", "bold"))
 
+def calc(*args):
+    argc = len(args)
+
+    if(args[1] == "-h"):
+        print("Usage: calc [x/b/i] [expr]")
+        exit()
+
+    regex_ipt = re.compile(r"(.*) (.*)")
+
+    if("i" in args):
+        while(True):
+            sys.stdout.write(green("(calc)$ ", "bold"))
+            ipt_data = input()
+            ipt = regex_ipt.findall(ipt_data)
+            if not(ipt):
+                ipt = ipt_data
+                ln = 1
+                exp = ipt
+            else:
+                ipt = ipt[0]
+                ln = len(ipt)
+                if(ln == 1):
+                    exp = ipt[0]
+                else:
+                    if(len(ipt[0]) == 1): 
+                        fmt = ipt[0]
+                        exp = ipt[1]
+                    else:
+                        exp = ipt[0]
+                        fmt = ipt[1]
+            if(ln == 1):
+                if(exp == "q" or exp == "exit"):
+                    exit()
+                else:
+                    exec("print(" + exp + ")")
+            else:
+                if(fmt.count("x") > 0):
+                    exec("print(hex(" + exp + "))")
+                elif(fmt.count("b") > 0):
+                    exec("print(bin(" + exp + "))")
+    elif("x" in args):
+        fmtindex = args.index("x")
+        if(fmtindex == 1):
+            exp = args[2]
+        else:
+            exp = args[1]
+        exec("print(hex(" + exp + "))")
+        exit()
+    elif("b" in args):
+        fmtindex = args.index("b")
+        if(fmtindex == 1):
+            exp = args[2]
+        else:
+            exp = args[1]
+        exec("print(bin(" + exp + "))")
+    else:
+        exp = args[1]
+        if("f" in args):
+            exec("print(1.0*" + exp + ")")
+        else:
+            exec("print(" + exp + ")")
+
