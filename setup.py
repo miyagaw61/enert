@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 console_scripts = [
-        "calc=enert.enert:calc"
+        "calc=enert.enert:calc_command"
         ]
 
 setup(

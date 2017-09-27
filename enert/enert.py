@@ -425,7 +425,21 @@ def inf(data, color="green"):
         print(data)
         print(blue("="*term_x + "\n", "bold"))
 
-def calc(*args):
+def calc(args=None, cmd=False):
+    """
+    Usage:
+    calc("0xa") -> 10
+    calc("10 x") -> 0xa
+    calc("10 b") -> 0b1010
+    calc("5/3") -> 1.5
+    """
+    if args:
+        tmp = args.split(" ")
+        args = ["calc"]
+        for x in tmp:
+            args.append(x)
+    else:
+        args = sys.argv
     argc = len(args)
 
     if(args[1] == "-h"):
@@ -459,19 +473,34 @@ def calc(*args):
                 if(exp == "q" or exp == "exit"):
                     exit()
                 else:
-                    exec("print(" + exp + ")")
+                    if cmd:
+                        exec("print(" + exp + ")")
+                    else:
+                        return str(eval(exp))
             else:
                 if(fmt.count("x") > 0):
-                    exec("print(hex(" + exp + "))")
+                    if cmd:
+                        exec("print(hex(" + exp + "))")
+                    else:
+                        var = eval(exp)
+                        return hex(var)
                 elif(fmt.count("b") > 0):
-                    exec("print(bin(" + exp + "))")
+                    if cmd:
+                        exec("print(bin(" + exp + "))")
+                    else:
+                        var =  eval(exp)
+                        return bin(var)
     elif("x" in args):
         fmtindex = args.index("x")
         if(fmtindex == 1):
             exp = args[2]
         else:
             exp = args[1]
-        exec("print(hex(" + exp + "))")
+        if cmd:
+            exec("print(hex(" + exp + "))")
+        else:
+            var = eval(exp)
+            return hex(var)
         exit()
     elif("b" in args):
         fmtindex = args.index("b")
@@ -479,11 +508,24 @@ def calc(*args):
             exp = args[2]
         else:
             exp = args[1]
-        exec("print(bin(" + exp + "))")
+        if cmd:
+            exec("print(bin(" + exp + "))")
+        else:
+            var = eval(exp)
+            return bin(var)
     else:
         exp = args[1]
         if("f" in args):
-            exec("print(1.0*" + exp + ")")
+            if cmd:
+                exec("print(1.0*" + exp + ")")
+            else:
+                return str(eval("1.0*" + exp))
         else:
-            exec("print(" + exp + ")")
+            if cmd:
+                exec("print(" + exp + ")")
+            else:
+                var = eval(exp)
+                return str(var)
 
+def calc_command():
+    calc(args=None, cmd=True)
