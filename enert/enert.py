@@ -535,3 +535,10 @@ fl = Fl
 shell = Shell
 screen = Screen
 menu = Menu
+
+def list_uniq(lst):
+    lst_uniq = []
+    for x in lst:
+        if x not in lst_uniq:
+            lst_uniq.append(x)
+    return lst_uniq
