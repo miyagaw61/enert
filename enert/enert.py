@@ -4,7 +4,8 @@
 #
 #       License: MIT
 
-import os, sys, subprocess, re, binascii, fcntl, termios
+import os, sys, subprocess, re, binascii
+#import fcntl
 from .toplevel import *
 
 argv = sys.argv
