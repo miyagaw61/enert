@@ -39,7 +39,7 @@ CTRL_H = 8
 CTRL_L = 12
 CTRL_S = 19
 
-class fl:
+class Fl:
     def __init__(self, file_name):
         self.name = file_name
 
@@ -118,7 +118,7 @@ class fl:
         else:
             return ""
 
-class shell:
+class Shell:
     def __init__(self, cmd):
         self.cmd = cmd
 
@@ -271,7 +271,7 @@ def getch():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
-class screen():
+class Screen():
     def __init__(self):
         save()
 
@@ -290,7 +290,7 @@ class screen():
         sys.stdout.write(strings)
         restore()
 
-class menu():
+class Menu():
     def __init__(self, lst, function):
         self.i = 0
         self.lst = lst
@@ -530,3 +530,8 @@ def calc(args=None, cmd=False):
 
 def calc_command():
     calc(args=None, cmd=True)
+
+fl = Fl
+shell = Shell
+screen = Screen
+menu = Menu
