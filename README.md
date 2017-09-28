@@ -17,11 +17,11 @@ pip install "git+https://github.com/miyagaw61/enert.git#egg=enert"
 from enert import *
 ```
 
-## flクラス
+## Flクラス
 
 ```python
 file_name = "a.out"
-f = fl(file_name)
+f = Fl(file_name)
 ```
 - 編集
 
@@ -93,10 +93,10 @@ f.binary()
 f.binary(n)
 ```
 
-## shellクラス
+## Shellクラス
 
 ```python
-cmd = shell("ls | grep *.txt")
+cmd = Shell("ls | grep *.txt")
 ```
 - コマンド実行
 
@@ -110,7 +110,7 @@ cmd.call()
 stdout_str, stderr_str = cmd.get()
 ```
 
-## menuクラス
+## Menuクラス
 
 手軽にmenuが作成できる。
 
@@ -120,7 +120,7 @@ def function(i):
     m.menu_exit()
     print(lst[i])
     exit()
-m = menu(lst, function)
+m = Menu(lst, function)
 
 print('Please input "j" or "k" or "Enter".')
 m.menu_start()
@@ -190,14 +190,14 @@ lines_delete(n)
 clear()
 ```
 
-## screenクラス
+## Screenクラス
 
 制御関数と組み合わせて独自のmenuを作成する際に便利です。
 
 * 原点を作成
 
 ```python
-s = screen()
+s = Screen()
 ```
 
 * 原点を更新
@@ -219,7 +219,7 @@ from enert import *
 
 lst = ["hogehoge", "fugafugafugafuga", "piyopiyopiyo"]
 sys.stdout.write("Your Choise : ")
-s = screen()
+s = Screen()
 print("\n====================")
 print(black_red("> ", "bold") + black_white(lst[0], "bold"))
 print("  " + lst[1])
