@@ -553,19 +553,11 @@ def enerdict(**kwargs):
     d = Enerdict()
     for key in key_lst:
         d[key] = kwargs[key]
-    d.init()
     return d
 
 class Enerdict(dict):
     def __init__(self):
         dict.__init__(self)
-
-    def init(self):
-        key_list = list(self)
-        lst = []
-        for key in key_list:
-            lst.append([key, self[key]])
-        self.list = lst
 
     def key(self, idx):
         return list(self.keys())[idx]
@@ -573,6 +565,9 @@ class Enerdict(dict):
     def value(self, idx):
         return list(self.values())[idx]
 
-    def append(self, key, value):
-        self[key] = value
-        self.list = list(self)
+    def list(self):
+        key_list = list(self)
+        lst = []
+        for key in key_list:
+            lst.append([key, self[key]])
+        return lst
