@@ -277,10 +277,30 @@ dct.key(n)
 dct.value(n)
 ```
 
+* キーのリストをビュー型ではなく完全なリスト型で返却
+
+```python
+dct.keys
+```
+
+* 値のリストをビュー型ではなく完全なリスト型で返却
+
+```python
+dct.values
+```
+
 * リストのような形で返却
 
 ```python
-dct.list()
+dct.list
+```
+
+* 要素追加
+
+注意: dct['four'] = "4" は使用しないでください。
+
+```python
+dct.append('four', "4")
 ```
 
 * example
