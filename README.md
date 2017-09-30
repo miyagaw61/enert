@@ -262,7 +262,7 @@ dict型(辞書型)を継承して作成した辞書型の上位互換です
 * 宣言
 
 ```python
-dct = enerdict(one="1", two="2", "three"=3)
+dct = enerdict(one="1", two="2", three="3")
 ```
 
 * n番めのキーを取得
