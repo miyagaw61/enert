@@ -293,14 +293,14 @@ dct = enerdict(zero="0", one="1", two="2", three="3")
 #dct.value(3) -> "3"
 #dct.list() -> [['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3']]
 
-for key in d:
+for key in dct:
     print(key)
 #zero
 #one
 #two
 #three
 
-for key,value in d.list():
+for key,value in dct.list():
     print("key is " + key + ", value is " + value)
 #key is zero, value is 0
 #key is one, value is 1
