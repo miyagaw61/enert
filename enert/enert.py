@@ -7,6 +7,7 @@
 import os, sys, subprocess, re, binascii
 #import fcntl
 from .toplevel import *
+from collections import OrderedDict
 
 argv = sys.argv
 argc = len(argv)
@@ -408,21 +409,21 @@ def b():
     import pdb
     pdb.set_trace()
 
-def inf(data, color="green"):
+def inf(data, color="green", prefix="+"):
     term_y, term_x = get_term_size()
     if color == "green":
         print(green("\n" + "="*term_x, "bold"))
-        sys.stdout.write("[" + red("+", "bold") + "]")
+        sys.stdout.write("[" + red(prefix, "bold") + "]")
         print(data)
         print(green("="*term_x + "\n", "bold"))
     if color == "red":
         print(red("\n" + "="*term_x, "bold"))
-        sys.stdout.write("[" + red("+", "bold") + "]")
+        sys.stdout.write("[" + red(prefix, "bold") + "]")
         print(data)
         print(red("="*term_x + "\n", "bold"))
     if color == "blue":
         print(blue("\n" + "="*term_x, "bold"))
-        sys.stdout.write("[" + red("+", "bold") + "]")
+        sys.stdout.write("[" + red(prefix, "bold") + "]")
         print(data)
         print(blue("="*term_x + "\n", "bold"))
 
