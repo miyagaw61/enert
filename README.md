@@ -277,10 +277,10 @@ dct.key(n)
 dct.value(n)
 ```
 
-* リストのような形で出力
+* リストのような形で返却
 
 ```python
-dct.list
+dct.list()
 ```
 
 * example
@@ -300,7 +300,7 @@ for key in d:
 #two
 #three
 
-for key,value in d.list:
+for key,value in d.list():
     print("key is " + key + ", value is " + value)
 #key is zero, value is 0
 #key is one, value is 1
