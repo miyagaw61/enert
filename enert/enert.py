@@ -547,3 +547,32 @@ def list_uniq(lst):
         if x not in lst_uniq:
             lst_uniq.append(x)
     return lst_uniq
+
+def enerdict(**kwargs):
+    key_lst = list(kwargs)
+    d = Enerdict()
+    for key in key_lst:
+        d[key] = kwargs[key]
+    d.init()
+    return d
+
+class Enerdict(dict):
+    def __init__(self):
+        dict.__init__(self)
+
+    def init(self):
+        key_list = list(self)
+        lst = []
+        for key in key_list:
+            lst.append([key, self[key]])
+        self.list = lst
+
+    def key(self, idx):
+        return list(self.keys())[idx]
+
+    def value(self, idx):
+        return list(self.values())[idx]
+
+    def append(self, key, value):
+        self[key] = value
+        self.list = list(self)
