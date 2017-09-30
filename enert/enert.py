@@ -409,21 +409,25 @@ def b():
     import pdb
     pdb.set_trace()
 
-def inf(data, color="green", prefix="+"):
+def inf(data, prefix=None, c="green"):
+    if prefix == None:
+        prefix = "["+red("+","bold")+"]"
+    else:
+        prefix = red(prefix, 'bold')
     term_y, term_x = get_term_size()
-    if color == "green":
+    if c == "green":
         print(green("\n" + "="*term_x, "bold"))
-        sys.stdout.write("[" + red(prefix, "bold") + "]")
+        sys.stdout.write(prefix)
         print(data)
         print(green("="*term_x + "\n", "bold"))
-    if color == "red":
+    if c == "red":
         print(red("\n" + "="*term_x, "bold"))
-        sys.stdout.write("[" + red(prefix, "bold") + "]")
+        sys.stdout.write(prefix)
         print(data)
         print(red("="*term_x + "\n", "bold"))
-    if color == "blue":
+    if c == "blue":
         print(blue("\n" + "="*term_x, "bold"))
-        sys.stdout.write("[" + red(prefix, "bold") + "]")
+        sys.stdout.write(prefix)
         print(data)
         print(blue("="*term_x + "\n", "bold"))
 
