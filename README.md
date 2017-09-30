@@ -255,6 +255,59 @@ while 1:
         exit()
 ```
 
+## enerdict型
+
+dict型(辞書型)を継承して作成した辞書型の上位互換です
+
+* 宣言
+
+```python
+dct = enerdict(one="1", two="2", "three"=3)
+```
+
+* n番めのキーを取得
+
+```python
+dct.key(n)
+```
+
+* n番めの値を取得
+
+```python
+dct.value(n)
+```
+
+* リストのような形で出力
+
+```python
+dct.list
+```
+
+* example
+
+```python
+dct = enerdict(zero="0", one="1", two="2", three="3")
+
+#dct -> {'zero': '0', 'one': '1', 'two': '2', 'three': '3'}
+#dct.key(1) -> "one"
+#dct.value(3) -> "3"
+#dct.list() -> [['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3']]
+
+for key in d:
+    print(key)
+#zero
+#one
+#two
+#three
+
+for key,value in d.list:
+    print("key is " + key + ", value is " + value)
+#key is zero, value is 0
+#key is one, value is 1
+#key is two, value is 2
+#key is three, value is 3
+```
+
 ## その他
 
 * 文字に色を付与
