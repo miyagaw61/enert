@@ -311,7 +311,7 @@ dct = enerdict(zero="0", one="1", two="2", three="3")
 #dct -> {'zero': '0', 'one': '1', 'two': '2', 'three': '3'}
 #dct.key(1) -> "one"
 #dct.value(3) -> "3"
-#dct.list() -> [['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3']]
+#dct.list -> [['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3']]
 
 for key in dct:
     print(key)
@@ -320,12 +320,22 @@ for key in dct:
 #two
 #three
 
-for key,value in dct.list():
+for key,value in dct.list:
     print("key is " + key + ", value is " + value)
 #key is zero, value is 0
 #key is one, value is 1
 #key is two, value is 2
 #key is three, value is 3
+
+dct.append('four', "4")
+
+for key,value in dct.list:
+    print("key is " + key + ", value is " + value)
+#key is zero, value is 0
+#key is one, value is 1
+#key is two, value is 2
+#key is three, value is 3
+#key is four, value is 4
 ```
 
 ## その他
