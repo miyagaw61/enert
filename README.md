@@ -400,6 +400,16 @@ Example usage: 'git [commit <-m>] [push <branch>]'
 Example args: ['commit [-m <comment>]:commit to local repository', 'push [branch]:push to remote repository']
 ```
 
+* parserの基本骨格を作成
+
+これを使えば、簡単にパーサーの基本骨格を作成することが可能
+
+```python
+parser_A = mkparser(usage)
+parser_B = mkparser(usage, ['add', 'commit'])
+parser_A.add_argument('-a', '--all', action='store_true')
+```
+
 * リスト二つを比較して、一致するものが一つでもあるかどうかを調査
 
 一致するものが一つでもあれば1を返す。
