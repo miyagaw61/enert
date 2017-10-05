@@ -40,7 +40,7 @@ CTRL_H = 8
 CTRL_L = 12
 CTRL_S = 19
 
-class Fl:
+class File:
     def __init__(self, file_name):
         self.name = file_name
 
@@ -536,7 +536,8 @@ def calc(args=None, cmd=False):
 def calc_command():
     calc(args=None, cmd=True)
 
-fl = Fl
+Fl = File
+fl = File
 shell = Shell
 screen = Screen
 menu = Menu
