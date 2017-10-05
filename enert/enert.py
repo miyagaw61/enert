@@ -51,7 +51,7 @@ class File:
         if os.path.exists(self.name):
             return open(self.name).read()
         else:
-            return ""
+            return ''
     
     def linedata(self):
         if os.path.exists(self.name):
@@ -60,40 +60,40 @@ class File:
                 linedata[i] = regex_n.sub('', linedata[i])
             return linedata
         else:
-            return ""
+            return ''
 
     def white_data(self):
-        regex_color = re.compile(r"\x1b.*?m")
+        regex_color = re.compile(r'\x1b.*?m')
         if os.path.exists(self.name):
             data = open(self.name).read()
-            return regex_color.sub("", data)
+            return regex_color.sub('', data)
         else:
-            return ""
+            return ''
 
     def white_linedata(self):
-        regex_color = re.compile(r"\x1b.*?m")
+        regex_color = re.compile(r'\x1b.*?m')
         if os.path.exists(self.name):
             linedata = open(self.name).readlines()
             for i in range(len(linedata)):
                 linedata[i] = regex_n.sub('', linedata[i])
-                linedata[i] = regex_color.sub("", linedata[i])
+                linedata[i] = regex_color.sub('', linedata[i])
             return linedata
         else:
-            return ""
+            return ''
 
     def lines(self):
         if os.path.exists(self.name):
             return len(self.linedata())
         else:
-            return ""
+            return ''
 
     def write(self, data):
-        fd = open(self.name, "w")
+        fd = open(self.name, 'w')
         fd.write(data)
         fd.close()
 
     def add(self, data):
-        fd = open(self.name, "a")
+        fd = open(self.name, 'a')
         fd.write(data)
         fd.close()
 
@@ -105,19 +105,19 @@ class File:
             os.unlink(self.name)
 
     def edit(self):
-        editor = "vi"
-        if os.environ["EDITOR"]:
-            editor = os.environ["EDITOR"]
+        editor = 'vi'
+        if os.environ['EDITOR']:
+            editor = os.environ['EDITOR']
         cmd = [editor, 
                 self.name]
         subprocess.call(cmd)
 
-    def binary(self, fmt="default"):
+    def binary(self, fmt='default'):
         if os.path.exists(self.name):
-            binary_data = open(self.name, "rb").read()
+            binary_data = open(self.name, 'rb').read()
             return dmp(binary_data, fmt)
         else:
-            return ""
+            return ''
 
 class Shell:
     def __init__(self, cmd):
@@ -155,57 +155,57 @@ class Shell:
         f.rm()
         return linedata
 
-esc = "\033"
-csi = esc + "["
+esc = '\033'
+csi = esc + '['
 def to(n=1):
-    sys.stdout.write(csi + str(n) + "G")
+    sys.stdout.write(csi + str(n) + 'G')
     sys.stdout.flush()
 
 def all_delete():
-    sys.stdout.write(csi + "2K")
-    sys.stdout.write(csi + "1G")
+    sys.stdout.write(csi + '2K')
+    sys.stdout.write(csi + '1G')
     sys.stdout.flush()
 
 def n2tail_delete(n):
     to(str(n))
-    sys.stdout.write(csi + "0K")
-    sys.stdout.write(csi + "1G")
+    sys.stdout.write(csi + '0K')
+    sys.stdout.write(csi + '1G')
     sys.stdout.flush()
 
 def head2n_delete(n):
     to(str(n))
-    sys.stdout.write(csi + "1K")
-    sys.stdout.write(csi + "1G")
+    sys.stdout.write(csi + '1K')
+    sys.stdout.write(csi + '1G')
     sys.stdout.flush()
 
 def down(n=1):
-    sys.stdout.write(csi + str(n) + "B")
+    sys.stdout.write(csi + str(n) + 'B')
     sys.stdout.flush()
 
 def up(n=1):
-    sys.stdout.write(csi + str(n) + "A")
+    sys.stdout.write(csi + str(n) + 'A')
     sys.stdout.flush()
 
 def overwrite(strings):
-    sys.stdout.write("\r")
+    sys.stdout.write('\r')
     sys.stdout.write(strings)
 
 def save():
-    sys.stdout.write(csi + "s")
+    sys.stdout.write(csi + 's')
     sys.stdout.flush()
 
 def restore():
-    sys.stdout.write(csi + "u")
+    sys.stdout.write(csi + 'u')
     sys.stdout.flush()
 
 def lines_delete(n):
-    sys.stdout.write(csi + str(n) + "M")
+    sys.stdout.write(csi + str(n) + 'M')
 
 def get_term_size():
     return map(int, os.popen('stty size').read().split())
 
 def clear():
-    shell("clear").call()
+    shell('clear').call()
 
 def writefile(buf_arg,file_name):
     with open(file_name, 'wb') as f:
@@ -239,7 +239,7 @@ def diff(a, b):
 
 def dmp(binary, fmt=None):
     """
-        Usage: dmp(bin binary, split=""/"x"/"d")
+        Usage: dmp(bin binary, split=''/'x'/'d')
     """
     res = binascii.hexlify(binary)
     if(fmt != None):
@@ -254,7 +254,7 @@ def complement(value, s):
         Usage: complement(int value, int s)
     """
     value_str = bin(value)[2:].zfill(s)
-    if(value_str[0] == "0"):
+    if(value_str[0] == '0'):
         return value
     else:
         value = value - 1
@@ -297,7 +297,7 @@ class Menu():
         self.lst = lst
         self.num = len(lst)
         self.function = function
-        self.top = blue(">", "bold") + "  "
+        self.top = blue('>', 'bold') + '  '
         self.to = 3
 
     def menu_exit(self):
@@ -307,12 +307,12 @@ class Menu():
 
     def menu_start(self):
         sys.stdout.write(self.top)
-        print("")
+        print('')
         for self.i in range(self.num):
             if self.i == 0:
-                print(black_red("> ", "bold") + black_white(self.lst[self.i], "bold"))
+                print(black_red('> ', 'bold') + black_white(self.lst[self.i], 'bold'))
             else:
-                print(black_white(" ") +  " " + self.lst[self.i])
+                print(black_white(' ') +  ' ' + self.lst[self.i])
         self.i = 0
         up(self.num+1)
         save()
@@ -322,27 +322,27 @@ class Menu():
             restore()
             sys.stdout.write(self.top)
             to(self.to)
-            if (key == "j" or ord(key) == DOWN) and self.i < self.num-1:
+            if (key == 'j' or ord(key) == DOWN) and self.i < self.num-1:
                 down(self.i+1)
                 all_delete()
-                overwrite(black_white(" ") + " " + self.lst[self.i])
+                overwrite(black_white(' ') + ' ' + self.lst[self.i])
                 restore()
                 down(self.i+2)
-                overwrite(black_red("> ", "bold") + black_white(self.lst[self.i+1], "bold"))
+                overwrite(black_red('> ', 'bold') + black_white(self.lst[self.i+1], 'bold'))
                 restore()
                 to(3)
                 self.i = self.i + 1
-            if (key == "k" or ord(key) == UP) and self.i >= 1:
+            if (key == 'k' or ord(key) == UP) and self.i >= 1:
                 down(self.i+1)
                 all_delete()
-                overwrite(black_white(" ") + " " + self.lst[self.i])
+                overwrite(black_white(' ') + ' ' + self.lst[self.i])
                 restore()
                 down(self.i)
-                overwrite(black_red("> ", "bold") + black_white(self.lst[self.i-1], "bold"))
+                overwrite(black_red('> ', 'bold') + black_white(self.lst[self.i-1], 'bold'))
                 restore()
                 to(3)
                 self.i = self.i -1
-            elif key == "q" or ord(key) == CTRL_C or ord(key) == CTRL_D:
+            elif key == 'q' or ord(key) == CTRL_C or ord(key) == CTRL_D:
                 self.menu_exit()
                 exit()
             elif ord(key) == ENTER:
@@ -409,54 +409,54 @@ def b():
     import pdb
     pdb.set_trace()
 
-def inf(data, prefix=None, c="green"):
+def inf(data, prefix=None, c='green'):
     if prefix == None:
-        prefix = "["+red("+","bold")+"]"
+        prefix = '['+red('+','bold')+']'
     else:
         prefix = red(prefix, 'bold')
     term_y, term_x = get_term_size()
-    if c == "green":
-        print(green("\n" + "="*term_x, "bold"))
+    if c == 'green':
+        print(green('\n' + '='*term_x, 'bold'))
         sys.stdout.write(prefix)
         print(data)
-        print(green("="*term_x + "\n", "bold"))
-    if c == "red":
-        print(red("\n" + "="*term_x, "bold"))
+        print(green('='*term_x + '\n', 'bold'))
+    if c == 'red':
+        print(red('\n' + '='*term_x, 'bold'))
         sys.stdout.write(prefix)
         print(data)
-        print(red("="*term_x + "\n", "bold"))
-    if c == "blue":
-        print(blue("\n" + "="*term_x, "bold"))
+        print(red('='*term_x + '\n', 'bold'))
+    if c == 'blue':
+        print(blue('\n' + '='*term_x, 'bold'))
         sys.stdout.write(prefix)
         print(data)
-        print(blue("="*term_x + "\n", "bold"))
+        print(blue('='*term_x + '\n', 'bold'))
 
 def calc(args=None, cmd=False):
     """
     Usage:
-    calc("0xa") -> 10
-    calc("10 x") -> 0xa
-    calc("10 b") -> 0b1010
-    calc("5/3") -> 1.5
+    calc('0xa') -> 10
+    calc('10 x') -> 0xa
+    calc('10 b') -> 0b1010
+    calc('5/3') -> 1.5
     """
     if args:
-        tmp = args.split(" ")
-        args = ["calc"]
+        tmp = args.split(' ')
+        args = ['calc']
         for x in tmp:
             args.append(x)
     else:
         args = sys.argv
     argc = len(args)
 
-    if(args[1] == "-h"):
-        print("Usage: calc [x/b/i] [expr]")
+    if(args[1] == '-h'):
+        print('Usage: calc [x/b/i] [expr]')
         exit()
 
-    regex_ipt = re.compile(r"(.*) (.*)")
+    regex_ipt = re.compile(r'(.*) (.*)')
 
-    if("i" in args):
+    if('i' in args):
         while(True):
-            sys.stdout.write(green("(calc)$ ", "bold"))
+            sys.stdout.write(green('(calc)$ ', 'bold'))
             ipt_data = input()
             ipt = regex_ipt.findall(ipt_data)
             if not(ipt):
@@ -476,59 +476,59 @@ def calc(args=None, cmd=False):
                         exp = ipt[0]
                         fmt = ipt[1]
             if(ln == 1):
-                if(exp == "q" or exp == "exit"):
+                if(exp == 'q' or exp == 'exit'):
                     exit()
                 else:
                     if cmd:
-                        exec("print(" + exp + ")")
+                        exec('print(' + exp + ')')
                     else:
                         return str(eval(exp))
             else:
-                if(fmt.count("x") > 0):
+                if(fmt.count('x') > 0):
                     if cmd:
-                        exec("print(hex(" + exp + "))")
+                        exec('print(hex(' + exp + '))')
                     else:
                         var = eval(exp)
                         return hex(var)
-                elif(fmt.count("b") > 0):
+                elif(fmt.count('b') > 0):
                     if cmd:
-                        exec("print(bin(" + exp + "))")
+                        exec('print(bin(' + exp + '))')
                     else:
                         var =  eval(exp)
                         return bin(var)
-    elif("x" in args):
-        fmtindex = args.index("x")
+    elif('x' in args):
+        fmtindex = args.index('x')
         if(fmtindex == 1):
             exp = args[2]
         else:
             exp = args[1]
         if cmd:
-            exec("print(hex(" + exp + "))")
+            exec('print(hex(' + exp + '))')
         else:
             var = eval(exp)
             return hex(var)
         exit()
-    elif("b" in args):
-        fmtindex = args.index("b")
+    elif('b' in args):
+        fmtindex = args.index('b')
         if(fmtindex == 1):
             exp = args[2]
         else:
             exp = args[1]
         if cmd:
-            exec("print(bin(" + exp + "))")
+            exec('print(bin(' + exp + '))')
         else:
             var = eval(exp)
             return bin(var)
     else:
         exp = args[1]
-        if("f" in args):
+        if('f' in args):
             if cmd:
-                exec("print(1.0*" + exp + ")")
+                exec('print(1.0*' + exp + ')')
             else:
-                return str(eval("1.0*" + exp))
+                return str(eval('1.0*' + exp))
         else:
             if cmd:
-                exec("print(" + exp + ")")
+                exec('print(' + exp + ')')
             else:
                 var = eval(exp)
                 return str(var)
