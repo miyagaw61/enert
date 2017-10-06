@@ -557,9 +557,9 @@ def enerdict(**kwargs):
     d.init()
     return d
 
-class Enerdict(dict):
+class Enerdict(OrderedDict):
     def __init__(self):
-        dict.__init__(self)
+        OrderedDict.__init__(self)
         self.keys_bak = self.keys
         self.values_bak = self.values
 
