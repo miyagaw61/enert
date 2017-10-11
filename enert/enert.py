@@ -49,7 +49,11 @@ class File:
 
     def data(self):
         if os.path.exists(self.name):
-            return open(self.name).read()
+            try:
+                data = open(self.name).read()
+            except:
+                data = open(self.name, 'rb').read()
+            return data
         else:
             return ''
     
@@ -112,12 +116,12 @@ class File:
                 self.name]
         subprocess.call(cmd)
 
-    def binary(self, fmt='default'):
-        if os.path.exists(self.name):
-            binary_data = open(self.name, 'rb').read()
-            return dmp(binary_data, fmt)
-        else:
-            return ''
+#    def binary(self, fmt=None):
+#        if os.path.exists(self.name):
+#            binary_data = open(self.name, 'rb').read()
+#            return dmp(binary_data, fmt)
+#        else:
+#            return ''
 
 class Shell:
     def __init__(self, cmd):
@@ -242,6 +246,8 @@ def dmp(binary, fmt=None):
         Usage: dmp(bin binary, split=''/'x'/'d')
     """
     res = binascii.hexlify(binary)
+    if type(res) == bytes:
+        res = str(res)[2:-1]
     if(fmt != None):
         arr = splitn(res, fmt)
         res = []
