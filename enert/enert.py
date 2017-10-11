@@ -625,3 +625,9 @@ def search(arg, out=False):
         inf(output, '[+]RESULT:\n')
 
     return result
+
+def to_ascii(arg):
+    result = ''
+    for x in arg:
+        result += hex(ord(x))[2:]
+    return result
