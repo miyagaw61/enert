@@ -57,6 +57,12 @@ class File:
         else:
             return ''
     
+    def binary(self):
+        if os.path.exists(self.name):
+            data = open(self.name, 'rb').read()
+            data = dmp(data)
+            return data
+
     def linedata(self):
         if os.path.exists(self.name):
             linedata = open(self.name).readlines()
