@@ -36,7 +36,7 @@ f.lines()
 ```
 
 - データ読み込み
-
+失敗した時はbytes型になります
 ```python
 f.data()
 ```
@@ -425,3 +425,9 @@ help() -> help(lst=argv, idx=None)
 help(lst=lstA) -> help(lst=lstA, idx=None)
 help(idx=3) -> help(lst=argv, idx=3)
 ```
+
+* search
+
+* search_binary
+
+* to_ascii
