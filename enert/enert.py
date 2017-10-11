@@ -5,43 +5,12 @@
 #       License: MIT
 
 import os, sys, subprocess, re, binascii
-#import fcntl
+from .init import *
 from .toplevel import *
 from collections import OrderedDict
 
-argv = sys.argv
-argc = len(argv)
-regex_n = re.compile(r'\n')
-regex_before_n = re.compile(r'(.*?)\n')
-regex_s = re.compile(r' ')
-regex_blankline = re.compile(r'^$')
-
-try:
-    if xrange:
-        python3 = False
-        python2 = True
-except:
-    python3 = True
-    python2 = False
-
-if python2:
-    input = raw_input
-elif python3:
+if python3:
     from .argparse import *
-
-ENTER = 13
-SPACE = 32
-UP = 65
-DOWN = 66
-LEFT = 68
-RIGHT = 67
-CTRL_C = 3
-CTRL_D = 4
-CTRL_J = 10
-CTRL_K = 11
-CTRL_H = 8
-CTRL_L = 12
-CTRL_S = 19
 
 class File:
     def __init__(self, file_name):

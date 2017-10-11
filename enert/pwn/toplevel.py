@@ -59,3 +59,6 @@ from pwnlib3.util.packing import *
 from pwnlib3.util.proc import pidof
 from pwnlib3.util.splash import *
 from pwnlib3.util.web import *
+
+from enert.init import *
+from .enerpwn import *

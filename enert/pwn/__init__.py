@@ -2,10 +2,8 @@
 
 try:
     from .toplevel import *
-
     pwnlib3.args.initialize()
     pwnlib3.log.install_default_handler()
-
     log = pwnlib3.log.getLogger('pwnlib3.exploit')
     args = pwnlib3.args.args
 except:
