@@ -94,13 +94,6 @@ class File:
                 self.name]
         subprocess.call(cmd)
 
-#    def binary(self, fmt=None):
-#        if os.path.exists(self.name):
-#            binary_data = open(self.name, 'rb').read()
-#            return dmp(binary_data, fmt)
-#        else:
-#            return ''
-
 class Shell:
     def __init__(self, cmd):
         self.cmd = cmd
