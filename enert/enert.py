@@ -26,6 +26,8 @@ except:
 
 if python2:
     input = raw_input
+elif python3:
+    from .argparse import *
 
 ENTER = 13
 SPACE = 32
