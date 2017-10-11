@@ -618,6 +618,28 @@ def search(arg, out=False):
         if data.count(arg) > 0:
             result.append(lst[i])
 
+def search_binary(arg, out=False):
+    lst,err = Shell("find -type f").linedata()
+    length = len(lst)
+    result = []
+    for i in range(len(lst)):
+        f = File(lst[i])
+        data = f.binary()
+        if i%100 == 0:
+            if out:
+                if len(data) > 100:
+                    inf(data[:100], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                elif len(data) > 50:
+                    inf(data[:50], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                elif len(data) > 5:
+                    inf(data[:5], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                elif len(data) > 0:
+                    inf(data[:1], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                elif len(data) == 0:
+                    inf(blue('None', 'bold'), '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+        if data.count(arg) > 0:
+            result.append(lst[i])
+
     if out:
         output = ''
         for x in result:
