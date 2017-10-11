@@ -605,9 +605,7 @@ def search(arg, out=False):
             data = dmp(data)
         if i%100 == 0:
             if out:
-                if len(data) > 100:
-                    inf(data[:100], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
-                elif len(data) > 50:
+                if len(data) > 50:
                     inf(data[:50], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
                 elif len(data) > 5:
                     inf(data[:5], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
@@ -617,6 +615,14 @@ def search(arg, out=False):
                     inf(blue('None', 'bold'), '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
         if data.count(arg) > 0:
             result.append(lst[i])
+
+    if out:
+        output = ''
+        for x in result:
+            output += x + '\n'
+        inf(output, '[+]RESULT:\n')
+
+    return result
 
 def search_binary(arg, out=False):
     lst,err = Shell("find -type f").linedata()
