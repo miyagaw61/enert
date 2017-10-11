@@ -12,6 +12,7 @@ from collections import OrderedDict
 argv = sys.argv
 argc = len(argv)
 regex_n = re.compile(r'\n')
+regex_before_n = re.compile(r'(.*?)\n')
 regex_s = re.compile(r' ')
 regex_blankline = re.compile(r'^$')
 
@@ -596,7 +597,7 @@ class Enerdict(OrderedDict):
 
 def search(arg, out=False):
     lst,err = Shell("find -type f").linedata()
-    length = len(lst)
+    length_str = str(len(lst))
     result = []
     for i in range(len(lst)):
         f = File(lst[i])
@@ -605,14 +606,23 @@ def search(arg, out=False):
             data = dmp(data)
         if i%100 == 0:
             if out:
-                if len(data) > 50:
-                    inf(data[:50], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
-                elif len(data) > 5:
-                    inf(data[:5], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
-                elif len(data) > 0:
-                    inf(data[:1], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
-                elif len(data) == 0:
-                    inf(blue('None', 'bold'), '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                if type(f.data()) == bytes:
+                    if len(data) > 50:
+                        inf(data[:50], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                    elif len(data) > 5:
+                        inf(data[:5], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                    elif len(data) > 0:
+                        inf(data[:1], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                    elif len(data) == 0:
+                        inf(blue('None', 'bold'), '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
+                else:
+                    if len(data) > 50:
+                        tmp = data[:50]
+                        if tmp.count(r'\n') > 0:
+                            tmp = regex_before_n.findall(tmp)[0]
+                    elif len(data) == 0:
+                        tmp = blue('None', 'bold')
+                    inf(tmp, '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
         if data.count(arg) > 0:
             result.append(lst[i])
 
