@@ -608,17 +608,17 @@ def search(arg, out=False):
             if out:
                 if type(f.data()) == bytes:
                     if len(data) > 50:
-                        inf(data[:50], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                        inf(data[:50], '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
                     elif len(data) > 5:
-                        inf(data[:5], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                        inf(data[:5], '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
                     elif len(data) > 0:
-                        inf(data[:1], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                        inf(data[:1], '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
                     elif len(data) == 0:
                         inf(blue('None', 'bold'), '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
                 else:
                     if len(data) > 50:
                         tmp = data[:50]
-                        if tmp.count(r'\n') > 0:
+                        if tmp.count('\n') > 0:
                             tmp = regex_before_n.findall(tmp)[0]
                     elif len(data) == 0:
                         tmp = blue('None', 'bold')
@@ -636,7 +636,7 @@ def search(arg, out=False):
 
 def search_binary(arg, out=False):
     lst,err = Shell("find -type f").linedata()
-    length = len(lst)
+    length_str = str(len(lst))
     result = []
     for i in range(len(lst)):
         f = File(lst[i])
@@ -644,15 +644,15 @@ def search_binary(arg, out=False):
         if i%100 == 0:
             if out:
                 if len(data) > 100:
-                    inf(data[:100], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                    inf(data[:100], '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
                 elif len(data) > 50:
-                    inf(data[:50], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                    inf(data[:50], '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
                 elif len(data) > 5:
-                    inf(data[:5], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                    inf(data[:5], '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
                 elif len(data) > 0:
-                    inf(data[:1], '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                    inf(data[:1], '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
                 elif len(data) == 0:
-                    inf(blue('None', 'bold'), '[' + str(i) + '/' + str(length) + ']' + f.name + ':\n')
+                    inf(blue('None', 'bold'), '[' + str(i) + '/' + length_str + ']' + f.name + ':\n')
         if data.count(arg) > 0:
             result.append(lst[i])
 
