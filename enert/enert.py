@@ -675,19 +675,19 @@ def bin2ints(n):
 def sanitize(text):
     return text.encode('utf-8', 'replace').decode('utf-8')
 
-#def pad(s, b_size):
-#    length = len(s)
-#    n = math.ceil(length / b_size)
-#    s += n.to_bytes(1, 'big')*n
-#    #return s + (b_size - len(s) % b_size) * chr(b_size - len(s) % b_size)
-#    return s
-#
-#def unpad(s):
-#    last = s[-2:-1]
-#    padding = s[-ord(s[len(s)-1:]):]
-#    for x in padding:
-#        #if x != int.from_bytes(last, 'big'):
-#        if x != bin2ints(padding)[0]:
-#            print('padding-error.')
-#            exit()
-#    return s[:-ord(s[len(s)-1:])]
+def pad(s, b_size):
+    length = len(s)
+    n = math.ceil(length / b_size)
+    s += n.to_bytes(1, 'big')*n
+    #return s + (b_size - len(s) % b_size) * chr(b_size - len(s) % b_size)
+    return s
+
+def unpad(s):
+    last = s[-2:-1]
+    padding = s[-ord(s[len(s)-1:]):]
+    for x in padding:
+        #if x != int.from_bytes(last, 'big'):
+        if x != bin2ints(padding)[0]:
+            print('padding-error.')
+            exit()
+    return s[:-ord(s[len(s)-1:])]
