@@ -528,16 +528,23 @@ def list_uniq(lst):
             lst_uniq.append(x)
     return lst_uniq
 
-class enerdict(dict):
+_dict = dict
+class dict(_dict):
     def __init__(self, **kwargs):
-        self._dict = dict(kwargs)
+        _dict.__init__(self, kwargs)
         key_lst = list(kwargs)
         lst = []
         for key in key_lst:
-            lst.append([key, self._dict[key]])
+            lst.append([key, self[key]])
         self.list = lst
-        self.keys = list(self._dict.keys())
-        self.values = list(self._dict.values())
+        self.keys = list(_dict.keys(self))
+        self.values = list(_dict.values(self))
+
+    def __setitem__(self, key, value):
+        _dict.__setitem__(self, key, value)
+        self.list.append([key, value])
+        self.keys = list(_dict.keys(self))
+        self.values = list(_dict.values(self))
 
     def key(self, idx):
         """
@@ -551,23 +558,15 @@ class enerdict(dict):
         """
         return '[+]Enert Is Updated! Please Modify "self.value(n) -> self.values[n]" !!'
 
-    def __str__(self):
-        return repr(self._dict)
-
-    def __repr__(self):
-        return repr(self._dict)
-
-    def __setitem__(self, key, value):
-        self._dict[key] = value
-
     def append(self, *args, **kwargs):
         if len(args) > 1:
             key = args[0]
             value = args[1]
-            self._dict[key] = value
+            self[key] = value
         elif len(kwargs) > 0:
             for key in kwargs:
-                self._dict[key] = kwargs[key]
+                self[key] = kwargs[key]
+enerdict = dict
 
 def search(arg, out=False):
     lst,err = Shell("find -type f").linedata()
