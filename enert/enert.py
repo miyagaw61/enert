@@ -8,7 +8,7 @@ import os, sys, subprocess, re, binascii
 from .init import *
 from .toplevel import *
 from collections import OrderedDict
-#import datetime
+import datetime
 #import better_exceptions
 
 if python3:
@@ -644,12 +644,12 @@ def to_ascii(arg):
         result += hex(ord(x))[2:]
     return result
 
-#def get_now():
-#    now = datetime.datetime.now() 
-#    year = str(now.year)[2:]
-#    month = '{0:02d}'.format(now.month)
-#    day = '{0:02d}'.format(now.day)
-#    hour = '{0:02d}'.format(now.hour)
-#    minute = '{0:02d}'.format(now.minute)
-#    second = '{0:02d}'.format(now.second)
-#    return enerdict(year=year, month=month, day=day, hour=hour, minute=minute, second=second)
+def get_now():
+    now = datetime.datetime.now() 
+    year = str(now.year)[2:]
+    month = '{0:02d}'.format(now.month)
+    day = '{0:02d}'.format(now.day)
+    hour = '{0:02d}'.format(now.hour)
+    minute = '{0:02d}'.format(now.minute)
+    second = '{0:02d}'.format(now.second)
+    return enerdict(year=year, month=month, day=day, hour=hour, minute=minute, second=second)

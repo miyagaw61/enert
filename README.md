@@ -430,8 +430,10 @@ help(lst=lstA) -> help(lst=lstA, idx=None)
 help(idx=3) -> help(lst=argv, idx=3)
 ```
 
-* search
+* search()
 
-* search_binary
+* search_binary()
 
-* to_ascii
+* to_ascii()
+
+* get_now()
