@@ -1,3 +1,6 @@
 rm -rf "$(pip --version | grep -oP '/.*?(?= )')/enert"
 rm -rf "$(pip --version | grep -oP '/.*?(?= )')/enert.*egg"
 python setup.py install
+rm -rf build
+rm -rf dist
+rm -rf enert.egg-info
