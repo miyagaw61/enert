@@ -539,6 +539,18 @@ class enerdict(dict):
         self.keys = list(self._dict.keys())
         self.values = list(self._dict.values())
 
+    def key(self, idx):
+        """
+        Will Delete
+        """
+        return '[+]Enert Is Updated! Please Modify "self.key(n) -> self.keys[n]" !!'
+
+    def value(self, idx):
+        """
+        Will Delete
+        """
+        return '[+]Enert Is Updated! Please Modify "self.value(n) -> self.values[n]" !!'
+
     def __str__(self):
         return repr(self._dict)
 
