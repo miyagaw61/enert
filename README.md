@@ -255,14 +255,14 @@ while 1:
         exit()
 ```
 
-## 新dict型メソッド
+## enerdict型
 
-dict型(辞書型)をオーバーライドして作成したdict型の上位互換です
+dict型(辞書型)を継承して作成したdict型の上位互換です
 
 * 宣言
 
 ```python
-dct = dict(one='1', two='2', three='3')
+dct = enerdict(one='1', two='2', three='3')
 ```
 
 * キーのリストをビュー型ではなく完全なリスト型で返却
@@ -306,7 +306,7 @@ dct['four'] = '4' #Please use this.
 * example
 
 ```python
-dct = dict(zero="0", one="1", two="2", three="3")
+dct = enerdict(zero="0", one="1", two="2", three="3")
 
 #>>> dct
 #>>> {'zero': '0', 'one': '1', 'two': '2', 'three': '3'}

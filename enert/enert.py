@@ -528,23 +528,22 @@ def list_uniq(lst):
             lst_uniq.append(x)
     return lst_uniq
 
-_dict = dict
-class dict(_dict):
+class enerdict(dict):
     def __init__(self, **kwargs):
-        _dict.__init__(self, kwargs)
+        dict.__init__(self, kwargs)
         key_lst = list(kwargs)
         lst = []
         for key in key_lst:
             lst.append([key, self[key]])
         self.list = lst
-        self.keys = list(_dict.keys(self))
-        self.values = list(_dict.values(self))
+        self.keys = list(dict.keys(self))
+        self.values = list(dict.values(self))
 
     def __setitem__(self, key, value):
-        _dict.__setitem__(self, key, value)
+        dict.__setitem__(self, key, value)
         self.list.append([key, value])
-        self.keys = list(_dict.keys(self))
-        self.values = list(_dict.values(self))
+        self.keys = list(dict.keys(self))
+        self.values = list(dict.values(self))
 
     def key(self, idx):
         """
@@ -566,7 +565,6 @@ class dict(_dict):
         elif len(kwargs) > 0:
             for key in kwargs:
                 self[key] = kwargs[key]
-enerdict = dict
 
 def search(arg, out=False):
     lst,err = Shell("find -type f").linedata()
