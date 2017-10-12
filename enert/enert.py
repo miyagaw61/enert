@@ -652,3 +652,42 @@ def get_now():
     minute = '{0:02d}'.format(now.minute)
     second = '{0:02d}'.format(now.second)
     return enerdict(year=year, month=month, day=day, hour=hour, minute=minute, second=second)
+
+def to_binary(n):
+    byte_len = (len(hex(n))-2)/2
+    byte_len = math.ceil(byte_len)
+    res = n.to_bytes(byte_len, 'big')
+    return res
+
+#def int2bins(n):
+#    hexed = hex(n)[2:]
+#    lst = splitn(hexed, 2)
+#    for i in range(len(lst)):
+#        lst[i] = int(lst[i], 16)
+#    return lst
+#
+#def bin2ints(n):
+#    lst = []
+#    for x in n:
+#        lst.append(x)
+#    return lst
+#        
+#def sanitize(text):
+#    return text.encode('utf-8', 'replace').decode('utf-8')
+#
+#def pad(s, b_size):
+#    length = len(s)
+#    n = math.ceil(length / b_size)
+#    s += n.to_bytes(1, 'big')*n
+#    #return s + (b_size - len(s) % b_size) * chr(b_size - len(s) % b_size)
+#    return s
+#
+#def unpad(s):
+#    last = s[-2:-1]
+#    padding = s[-ord(s[len(s)-1:]):]
+#    for x in padding:
+#        #if x != int.from_bytes(last, 'big'):
+#        if x != bin2ints(padding)[0]:
+#            print('padding-error.')
+#            exit()
+#    return s[:-ord(s[len(s)-1:])]
