@@ -440,12 +440,13 @@ help(idx=3) -> help(lst=argv, idx=3)
 
 * to_binary()
 
+* int2bins()
+
+* bin2ints()
+
 #* sanitize()
 #
 #* pad()
 #
 #* unpad()
 #
-#* int2bins()
-#
-#* bin2ints()

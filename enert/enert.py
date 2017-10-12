@@ -659,18 +659,18 @@ def to_binary(n):
     res = n.to_bytes(byte_len, 'big')
     return res
 
-#def int2bins(n):
-#    hexed = hex(n)[2:]
-#    lst = splitn(hexed, 2)
-#    for i in range(len(lst)):
-#        lst[i] = int(lst[i], 16)
-#    return lst
-#
-#def bin2ints(n):
-#    lst = []
-#    for x in n:
-#        lst.append(x)
-#    return lst
+def int2bins(n):
+    hexed = hex(n)[2:]
+    lst = splitn(hexed, 2)
+    for i in range(len(lst)):
+        lst[i] = int(lst[i], 16)
+    return lst
+
+def bin2ints(n):
+    lst = []
+    for x in n:
+        lst.append(x)
+    return lst
 #        
 #def sanitize(text):
 #    return text.encode('utf-8', 'replace').decode('utf-8')
