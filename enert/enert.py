@@ -671,10 +671,10 @@ def bin2ints(n):
     for x in n:
         lst.append(x)
     return lst
-#        
-#def sanitize(text):
-#    return text.encode('utf-8', 'replace').decode('utf-8')
-#
+        
+def sanitize(text):
+    return text.encode('utf-8', 'replace').decode('utf-8')
+
 #def pad(s, b_size):
 #    length = len(s)
 #    n = math.ceil(length / b_size)
