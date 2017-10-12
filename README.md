@@ -262,19 +262,7 @@ dict型(辞書型)を継承して作成した辞書型の上位互換です
 * 宣言
 
 ```python
-dct = enerdict(one="1", two="2", three="3")
-```
-
-* n番めのキーを取得
-
-```python
-dct.key(n)
-```
-
-* n番めの値を取得
-
-```python
-dct.value(n)
+dct = enerdict(one='1', two='2', three='3')
 ```
 
 * キーのリストをビュー型ではなく完全なリスト型で返却
@@ -289,6 +277,18 @@ dct.keys
 dct.values
 ```
 
+* n番めのキーを取得
+
+```python
+dct.keys[n]
+```
+
+* n番めの値を取得
+
+```python
+dct.values[n]
+```
+
 * リストのような形で返却
 
 ```python
@@ -297,10 +297,10 @@ dct.list
 
 * 要素追加
 
-注意: dct['four'] = "4" は使用しないでください。
-
 ```python
-dct.append('four', "4")
+dct['four'] = '4' #Please use this.
+#dct.append(five='5')   #You can use this, BUT don't use this!
+#dct.append('six', '6') #You can use this, BUT don't use this!
 ```
 
 * example
@@ -308,34 +308,38 @@ dct.append('four', "4")
 ```python
 dct = enerdict(zero="0", one="1", two="2", three="3")
 
-#dct -> {'zero': '0', 'one': '1', 'two': '2', 'three': '3'}
-#dct.key(1) -> "one"
-#dct.value(3) -> "3"
-#dct.list -> [['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3']]
+#>>> dct
+#>>> {'zero': '0', 'one': '1', 'two': '2', 'three': '3'}
+#>>> dct.keys[1]
+#>>> "one"
+#>>> dct.values[3]
+#>>> "3"
+#>>> dct.list
+#>>> [['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3']]
 
 for key in dct:
     print(key)
-#zero
-#one
-#two
-#three
+#>>> zero
+#>>> one
+#>>> two
+#>>> three
 
 for key,value in dct.list:
     print("key is " + key + ", value is " + value)
-#key is zero, value is 0
-#key is one, value is 1
-#key is two, value is 2
-#key is three, value is 3
+#>>> key is zero, value is 0
+#>>> key is one, value is 1
+#>>> key is two, value is 2
+#>>> key is three, value is 3
 
-dct.append('four', "4")
+dct['four'] = '4'
 
 for key,value in dct.list:
     print("key is " + key + ", value is " + value)
-#key is zero, value is 0
-#key is one, value is 1
-#key is two, value is 2
-#key is three, value is 3
-#key is four, value is 4
+#>>> key is zero, value is 0
+#>>> key is one, value is 1
+#>>> key is two, value is 2
+#>>> key is three, value is 3
+#>>> key is four, value is 4
 ```
 
 ## その他

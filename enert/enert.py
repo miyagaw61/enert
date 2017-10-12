@@ -8,6 +8,8 @@ import os, sys, subprocess, re, binascii
 from .init import *
 from .toplevel import *
 from collections import OrderedDict
+#import datetime
+#import better_exceptions
 
 if python3:
     from .argparse import *
@@ -526,38 +528,34 @@ def list_uniq(lst):
             lst_uniq.append(x)
     return lst_uniq
 
-def enerdict(**kwargs):
-    key_lst = list(kwargs)
-    d = Enerdict()
-    for key in key_lst:
-        d[key] = kwargs[key]
-    d.init()
-    return d
-
-class Enerdict(OrderedDict):
-    def __init__(self):
-        OrderedDict.__init__(self)
-        self.keys_bak = self.keys
-        self.values_bak = self.values
-
-    def init(self):
-        key_list = list(self)
+class enerdict(dict):
+    def __init__(self, **kwargs):
+        self._dict = dict(kwargs)
+        key_lst = list(kwargs)
         lst = []
-        for key in key_list:
-            lst.append([key, self[key]])
+        for key in key_lst:
+            lst.append([key, self._dict[key]])
         self.list = lst
-        self.keys = list(self.keys_bak())
-        self.values = list(self.values_bak())
+        self.keys = list(self._dict.keys())
+        self.values = list(self._dict.values())
 
-    def key(self, idx):
-        return list(self.keys_bak())[idx]
+    def __str__(self):
+        return repr(self._dict)
 
-    def value(self, idx):
-        return list(self.values_bak())[idx]
+    def __repr__(self):
+        return repr(self._dict)
 
-    def append(self, key, value):
-        self[key] = value
-        self.init()
+    def __setitem__(self, key, value):
+        self._dict[key] = value
+
+    def append(self, *args, **kwargs):
+        if len(args) > 1:
+            key = args[0]
+            value = args[1]
+            self._dict[key] = value
+        elif len(kwargs) > 0:
+            for key in kwargs:
+                self._dict[key] = kwargs[key]
 
 def search(arg, out=False):
     lst,err = Shell("find -type f").linedata()
@@ -633,3 +631,13 @@ def to_ascii(arg):
     for x in arg:
         result += hex(ord(x))[2:]
     return result
+
+#def get_now():
+#    now = datetime.datetime.now() 
+#    year = str(now.year)[2:]
+#    month = '{0:02d}'.format(now.month)
+#    day = '{0:02d}'.format(now.day)
+#    hour = '{0:02d}'.format(now.hour)
+#    minute = '{0:02d}'.format(now.minute)
+#    second = '{0:02d}'.format(now.second)
+#    return enerdict(year=year, month=month, day=day, hour=hour, minute=minute, second=second)
