@@ -756,3 +756,16 @@ def unpad(s):
             print('padding-error.')
             exit()
     return s[:-ord(s[len(s)-1:])]
+
+class Ssl:
+    def __init__(self, R_HOST, R_PORT):
+        self.R_HOST = R_HOST
+        self.R_PORT = R_PORT
+        self.ssock = ssl.wrap_socket(socket.socket(socket.AF_INET, socket.SOCK_STREAM))
+        self.ssock.connect((self.R_HOST, self.R_PORT))
+
+    def send(self, request):
+        self.ssock.send(request)
+        response = self.ssock.recv(65536)
+        self.ssock.close()
+        return response
