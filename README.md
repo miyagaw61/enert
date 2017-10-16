@@ -440,9 +440,31 @@ help(idx=3) -> help(lst=argv, idx=3)
 
 * to_binary()
 
+* split_byte()
+
 * int2bins()
 
+* int2bin()
+
 * bin2ints()
+
+* bin2int()
+
+* bin2hexes()
+
+* bin2hex()
+
+* hex2bins()
+
+* hex2bin()
+
+* hex2ints()
+
+* hex2int()
+
+* int2hexes()
+
+* int2hex()
 
 * sanitize()
 

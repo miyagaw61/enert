@@ -657,18 +657,85 @@ def to_binary(n):
     res = n.to_bytes(byte_len, 'big')
     return res
 
-def int2bins(n):
+def split_byte(n):
     hexed = hex(n)[2:]
     lst = splitn(hexed, 2)
     for i in range(len(lst)):
         lst[i] = int(lst[i], 16)
     return lst
 
+def int2bins(int_data):
+    int_lst = split_byte(int_data)
+    lst = []
+    for x in int_lst:
+        tmp = b''
+        tmp += x.to_bytes(1, 'big')
+        lst.append(tmp)
+    return lst
+
+def int2bin(int_data):
+    int_lst = split_byte(int_data)
+    tmp = b''
+    for x in int_lst:
+        tmp += x.to_bytes(1, 'big')
+    return tmp
+
 def bin2ints(n):
     lst = []
     for x in n:
         lst.append(x)
     return lst
+
+def bin2int(bin_data):
+    return int.from_bytes(bin_data, 'big')
+
+def bin2hexes(bin_data):
+    res_hex_str = bin2ints(bin_data)
+    tmp = []
+    for x in res_hex_str:
+        tmp.append('{0:02x}'.format(x))
+    return tmp
+
+def bin2hex(bin_data):
+    res_hex_str = bin2ints(bin_data)
+    tmp = []
+    for x in res_hex_str:
+        tmp.append('{0:02x}'.format(x))
+    return ''.join(tmp)
+
+def hex2bins(hex_str):
+    lst = splitn(hex_str, 2)
+    ans = []
+    for x in lst:
+        a = int(x, 16)
+        tmp = b''
+        tmp += a.to_bytes(1, 'big')
+        ans.append(tmp)
+    return ans
+
+def hex2bin(hex_str):
+    lst = splitn(hex_str, 2)
+    tmp = b''
+    for x in lst:
+        a = int(x, 16)
+        tmp += a.to_bytes(1, 'big')
+    return tmp
+
+def hex2ints(hex_str):
+    bin_data = hex2bin(hex_str)
+    return bin2ints(bin_data)
+
+def hex2int(hex_str):
+    bin_data = hex2bin(hex_str)
+    return bin2int(bin_data)
+
+def int2hex(int_data):
+    bin_data = int2bin(int_data)
+    return bin2hex(bin_data)
+
+def int2hexes(int_data):
+    bin_data = int2bin(int_data)
+    return bin2hexes(bin_data)
         
 def sanitize(text):
     return text.encode('utf-8', 'replace').decode('utf-8')
