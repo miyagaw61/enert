@@ -187,10 +187,10 @@ def clear():
     shell('clear').call()
 
 def writefile(buf_arg,file_name):
-#    if type(buf_arg) == str:
-#        with open(file_name, 'w') as f:
-#            f.write(buf_arg)
-#    else:
+    if type(buf_arg) == str:
+        with open(file_name, 'w') as f:
+            f.write(buf_arg)
+    else:
         with open(file_name, 'wb') as f:
             f.write(buf_arg)
 
