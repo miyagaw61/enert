@@ -9,7 +9,9 @@ from .init import *
 from .toplevel import *
 from collections import OrderedDict
 import datetime
-#import better_exceptions
+import ssl
+import socket
+import better_exceptions
 
 if python3:
     from .argparse import *
@@ -185,8 +187,12 @@ def clear():
     shell('clear').call()
 
 def writefile(buf_arg,file_name):
-    with open(file_name, 'wb') as f:
-        f.write(buf_arg)
+#    if type(buf_arg) == str:
+#        with open(file_name, 'w') as f:
+#            f.write(buf_arg)
+#    else:
+        with open(file_name, 'wb') as f:
+            f.write(buf_arg)
 
 def addr2index(x):
     return x*2
@@ -749,10 +755,10 @@ def pad(s, b_size):
 
 def unpad(s):
     last = s[-2:-1]
+    last = bin2int(last)
     padding = s[-ord(s[len(s)-1:]):]
     for x in padding:
-        #if x != int.from_bytes(last, 'big'):
-        if x != bin2ints(padding)[0]:
+        if x != last:
             print('padding-error.')
             exit()
     return s[:-ord(s[len(s)-1:])]
