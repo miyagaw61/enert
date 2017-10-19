@@ -4,7 +4,7 @@
 #
 #       License: MIT
 
-import os, sys, subprocess, re, binascii
+import os, sys, subprocess, re, binascii, shutil
 from .init import *
 from .toplevel import *
 from collections import OrderedDict
@@ -12,9 +12,7 @@ import datetime
 import ssl
 import socket
 import better_exceptions
-
-if python3:
-    from .argparse import *
+import platform
 
 class File:
     def __init__(self, file_name):
@@ -181,7 +179,15 @@ def lines_delete(n):
     sys.stdout.write(csi + str(n) + 'M')
 
 def get_term_size():
-    return map(int, os.popen('stty size').read().split())
+    lst = []
+    if PYTHON3:
+        lst.append(shutil.get_terminal_size()[1])
+        lst.append(shutil.get_terminal_size()[0])
+    elif PYTHON2:
+        from backports import shutil_get_terminal_size
+        lst.append(shutil_get_terminal_size.get_terminal_size()[1])
+        lst.append(shutil_get_terminal_size.get_terminal_size()[0])
+    return lst
 
 def clear():
     shell('clear').call()
