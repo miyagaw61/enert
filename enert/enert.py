@@ -13,6 +13,7 @@ import ssl
 import socket
 import better_exceptions
 import platform
+from backports import shutil_get_terminal_size
 
 class File:
     def __init__(self, file_name):
@@ -180,13 +181,8 @@ def lines_delete(n):
 
 def get_term_size():
     lst = []
-    if PYTHON3:
-        lst.append(shutil.get_terminal_size()[1])
-        lst.append(shutil.get_terminal_size()[0])
-    elif PYTHON2:
-        from backports import shutil_get_terminal_size
-        lst.append(shutil_get_terminal_size.get_terminal_size()[1])
-        lst.append(shutil_get_terminal_size.get_terminal_size()[0])
+    lst.append(shutil_get_terminal_size.get_terminal_size()[1])
+    lst.append(shutil_get_terminal_size.get_terminal_size()[0])
     return lst
 
 def clear():
