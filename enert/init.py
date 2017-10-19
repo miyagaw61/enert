@@ -1,3 +1,4 @@
+import os
 import sys
 import re
 import subprocess
@@ -27,12 +28,29 @@ try:
     if xrange:
         python3 = False
         python2 = True
+        PYTHON3 = False
+        PYTHON2 = True
 except:
     python3 = True
     python2 = False
+    PYTHON3 = True
+    PYTHON2 = False
 
-if python2:
+if PYTHON2:
     input = raw_input
+
+proc = subprocess.Popen(
+        'chcp',
+        shell  = True,
+        stdin  = subprocess.PIPE,
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE)
+stdout_str, stderr_str = proc.communicate()
+if len(stderr_str) == 0:
+    OS = 'windows'
+    os.system('')
+else:
+    OS = 'linux'
 
 proc = subprocess.Popen(
         'uname -a',
@@ -50,6 +68,10 @@ uname = stdout_str
 if uname.count('x86_64') > 0:
     arch = 64
     arch_str = 'amd64'
+    ARCH = 64
+    ARCH_STR = 'amd64'
 else:
     arch = 32
     arch_str = 'i386'
+    ARCH = 32
+    ARCH_STR = 'i386'
