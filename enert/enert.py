@@ -23,7 +23,7 @@ class File:
     def name(self):
         return self.name
 
-    def data(self):
+    def read(self):
         if os.path.exists(self.name):
             try:
                 data = open(self.name).read()
@@ -36,10 +36,9 @@ class File:
     def binary(self):
         if os.path.exists(self.name):
             data = open(self.name, 'rb').read()
-            data = dmp(data)
             return data
 
-    def linedata(self):
+    def readline(self):
         if os.path.exists(self.name):
             linedata = open(self.name).readlines()
             for i in range(len(linedata)):
@@ -48,7 +47,7 @@ class File:
         else:
             return ''
 
-    def white_data(self):
+    def white_read(self):
         regex_color = re.compile(r'\x1b.*?m')
         if os.path.exists(self.name):
             data = open(self.name).read()
@@ -56,7 +55,7 @@ class File:
         else:
             return ''
 
-    def white_linedata(self):
+    def white_readline(self):
         regex_color = re.compile(r'\x1b.*?m')
         if os.path.exists(self.name):
             linedata = open(self.name).readlines()
@@ -98,11 +97,23 @@ class File:
                 self.name]
         subprocess.call(cmd)
 
+File.data = File.read
+File.linedata = File.readline
+File.white_data = File.white_read
+File.white_linedata = File.white_readline
+
 class Shell:
     def __init__(self, cmd):
         self.cmd = cmd
 
-    def data(self):
+    def call(self):
+        #os.system(self.cmd)
+        proc = subprocess.Popen(
+                self.cmd,
+                shell  = True)
+        proc.communicate()
+
+    def read(self):
         proc = subprocess.Popen(
                 self.cmd,
                 shell  = True,
@@ -116,14 +127,7 @@ class Shell:
             stderr_str = stderr_str.decode()
         return [stdout_str, stderr_str]
 
-    def call(self):
-        #os.system(self.cmd)
-        proc = subprocess.Popen(
-                self.cmd,
-                shell  = True)
-        proc.communicate()
-
-    def linedata(self):
+    def readline(self):
         stdout_str, stderr_str = self.data()
         f = fl('/tmp/enert.tmp')
         f.write(stdout_str)
@@ -133,6 +137,9 @@ class Shell:
         linedata.append(f.linedata())
         f.rm()
         return linedata
+
+Shell.data = Shell.read
+Shell.linedata = Shell.readline
 
 esc = '\033'
 csi = esc + '['
@@ -798,3 +805,8 @@ def mkparser(usage, lst=None):
     parser.add_argument('args', nargs='*')
     return parser
 
+def grep(data, regex):
+    return re.compile(regex).findall(data)
+
+def sed(data, regex, after):
+    return re.compile(regex).sub(after, data)
