@@ -6,7 +6,7 @@
 # install
 
 ```bash
-pip install "git+https://github.com/miyagaw61/enert.git#egg=enert"
+pip install git+https://github.com/miyagaw61/enert
 ```
 
 # Usage
