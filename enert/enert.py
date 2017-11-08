@@ -38,7 +38,7 @@ class File:
             data = open(self.name, 'rb').read()
             return data
 
-    def readline(self):
+    def readlines(self):
         if os.path.exists(self.name):
             linedata = open(self.name).readlines()
             for i in range(len(linedata)):
@@ -55,7 +55,7 @@ class File:
         else:
             return ''
 
-    def white_readline(self):
+    def white_readlines(self):
         regex_color = re.compile(r'\x1b.*?m')
         if os.path.exists(self.name):
             linedata = open(self.name).readlines()
@@ -98,9 +98,9 @@ class File:
         subprocess.call(cmd)
 
 File.data = File.read
-File.linedata = File.readline
+File.linedata = File.readlines
 File.white_data = File.white_read
-File.white_linedata = File.white_readline
+File.white_linedata = File.white_readlines
 
 class Shell:
     def __init__(self, cmd):
@@ -127,7 +127,7 @@ class Shell:
             stderr_str = stderr_str.decode()
         return [stdout_str, stderr_str]
 
-    def readline(self):
+    def readlines(self):
         stdout_str, stderr_str = self.data()
         f = fl('/tmp/enert.tmp')
         f.write(stdout_str)
@@ -139,7 +139,7 @@ class Shell:
         return linedata
 
 Shell.data = Shell.read
-Shell.linedata = Shell.readline
+Shell.linedata = Shell.readlines
 
 esc = '\033'
 csi = esc + '['

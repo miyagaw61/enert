@@ -38,23 +38,23 @@ f.lines()
 - データ読み込み
 失敗した時はbytes型になります
 ```python
-f.data()
+f.read()
 ```
 
 - データを行ごとに読み込み
 
 ```python
-f.linedata()
+f.readlines()
 ```
 
 - 制御文字を削除してデータ読み込み
 ```python
-f.white_data()
+f.white_read()
 ```
 
 - 制御文字を削除してデータを行ごとに読み込み
 ```python
-f.white_linedata()
+f.white_readlines()
 ```
 
 - 書き込み
