@@ -87,7 +87,12 @@ class File:
 
     def rm(self):
         if os.path.exists(self.name):
-            os.unlink(self.name)
+            file_type, _ = Shell(f'file {self.name}').read()
+            file_type = re.compile(' (.*)').findall(file_type)[0]
+            if file_type == 'directory':
+                shutil.rmtree(self.name)
+            else:
+                os.unlink(self.name)
 
     def edit(self):
         editor = 'vi'
