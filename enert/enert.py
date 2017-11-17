@@ -830,3 +830,29 @@ def grep(data, regex):
 
 def sed(data, regex, after):
     return re.compile(regex).sub(after, data)
+
+def grep(victim, regex):
+    if type(victim) != list:
+        tmp = []
+        tmp.append(victim)
+        victim = tmp
+    regex = re.compile(regex)
+    ret = []
+    for i in range(len(victim)):
+        tmp = regex.findall(victim[i])
+        for j in range(len(tmp)):
+            ret.append(tmp[j])
+    if ret:
+        return victim
+    else:
+        return None
+
+def ogrep(victim, regex):
+    victim = grep(victim, regex)
+    regex = re.compile(regex)
+    ret = []
+    for i in range(len(victim)):
+        tmp_ret = regex.findall(victim[i])
+        for j in range(len(tmp_ret)):
+            ret.append(tmp_ret[j])
+    return ret
