@@ -15,6 +15,7 @@ import better_exceptions
 import platform
 from backports import shutil_get_terminal_size
 from argparse import *
+from distutils.dir_util import copy_tree
 
 class File:
     def __init__(self, file_name):
@@ -85,22 +86,36 @@ class File:
     def exist(self):
         return os.path.exists(self.name)
 
+    def isdir(self):
+        return os.path.isdir(self.name)
+
+    def isfile(self):
+        return os.path.isfile(self.name)
+
     def rm(self):
-        if os.path.exists(self.name):
-            file_type, _ = Shell(f'file {self.name}').read()
-            file_type = re.compile(' (.*)').findall(file_type)[0]
-            if file_type == 'directory':
-                shutil.rmtree(self.name)
-            else:
-                os.unlink(self.name)
+        if not os.path.exists(self.name):
+            return None
+        if os.path.isdir(self.name):
+            shutil.rmtree(self.name)
+        else:
+            os.unlink(self.name)
 
     def edit(self):
         editor = 'vi'
+        #TODO: add check os.environ
         if os.environ['EDITOR']:
             editor = os.environ['EDITOR']
         cmd = [editor, 
                 self.name]
         subprocess.call(cmd)
+
+    def cp(self, dst):
+        if not os.path.exists(self.name):
+            return None
+        if os.path.isdir(self.name):
+            copy_tree(self.name, dst)
+        else:
+            shutil.copy2(self.name, dst)
 
 File.data = File.read
 File.linedata = File.readlines
@@ -133,7 +148,7 @@ class Shell:
         return [stdout_str, stderr_str]
 
     def readlines(self):
-        stdout_str, stderr_str = self.data()
+        stdout_str, stderr_str = self.read()
         f = fl('/tmp/enert.tmp')
         f.write(stdout_str)
         linedata = []
