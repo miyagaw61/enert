@@ -116,6 +116,8 @@ class File:
         subprocess.call(cmd)
 
     def cp(self, dst):
+        if type(dst) == type(self):
+            dst = dst.name
         if not os.path.exists(self.name):
             return None
         if os.path.isdir(self.name):
@@ -124,6 +126,8 @@ class File:
             shutil.copy2(self.name, dst)
 
     def mv(self, dst):
+        if type(dst) == type(self):
+            dst = dst.name
         if not os.path.exists(self.name):
             return None
         if os.path.isdir(self.name):
