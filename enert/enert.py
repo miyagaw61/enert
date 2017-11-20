@@ -24,6 +24,12 @@ class File:
     def name(self):
         return self.name
 
+    def basename(self):
+        ret = self.name
+        if ret[-1] == '/':
+            ret = self.name[:-1]
+        return os.path.basename(ret)
+
     def read(self):
         if os.path.exists(self.name):
             try:
