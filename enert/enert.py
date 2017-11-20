@@ -117,6 +117,15 @@ class File:
         else:
             shutil.copy2(self.name, dst)
 
+    def mv(self, dst):
+        if not os.path.exists(self.name):
+            return None
+        if os.path.isdir(self.name):
+            copy_tree(self.name, dst)
+        else:
+            shutil.copy2(self.name, dst)
+        self.rm()
+
     def abspath(self):
         return os.path.abspath(self.name)
 
