@@ -117,6 +117,9 @@ class File:
         else:
             shutil.copy2(self.name, dst)
 
+    def abspath(self):
+        return os.path.abspath(self.name)
+
 File.data = File.read
 File.linedata = File.readlines
 File.white_data = File.white_read
