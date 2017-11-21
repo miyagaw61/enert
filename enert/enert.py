@@ -19,16 +19,14 @@ from distutils.dir_util import copy_tree
 
 class File:
     def __init__(self, file_name):
+        if file_name[-1] == '/':
+            file_name = file_name[:-1]
         self.name = file_name
+        self.basename = os.path.basename(self.name)
+        self.abspath = os.path.abspath(self.name)
 
     def name(self):
         return self.name
-
-    def basename(self):
-        ret = self.name
-        if ret[-1] == '/':
-            ret = self.name[:-1]
-        return os.path.basename(ret)
 
     def read(self):
         if os.path.exists(self.name):
@@ -135,9 +133,6 @@ class File:
         else:
             shutil.copy2(self.name, dst)
         self.rm()
-
-    def abspath(self):
-        return os.path.abspath(self.name)
 
 File.data = File.read
 File.linedata = File.readlines
