@@ -113,6 +113,10 @@ class File:
                 self.name]
         subprocess.call(cmd)
 
+    def mkdir(self):
+        if not self.exist():
+            os.makedirs(self.name)
+
     def cp(self, dst):
         if type(dst) == type(self):
             dst = dst.name
