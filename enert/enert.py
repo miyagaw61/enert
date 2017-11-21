@@ -138,6 +138,14 @@ class File:
             shutil.copy2(self.name, dst)
         self.rm()
 
+    def create(self):
+        lst = self.name.split('/')
+        if len(lst) > 1:
+            dirs = '/'.join(lst[:-1])
+            if not File(dirs).exist():
+                File(dirs).mkdir()
+        File(self.name).write('')
+
 File.data = File.read
 File.linedata = File.readlines
 File.white_data = File.white_read
