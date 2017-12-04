@@ -3,6 +3,7 @@ import sys
 import re
 import subprocess
 import platform
+from __future__ import division, print_function, absolute_import, unicode_literals
 
 argv = sys.argv
 argc = len(argv)
