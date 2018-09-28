@@ -79,14 +79,24 @@ class File:
             return ''
 
     def write(self, data):
-        fd = open(self.name, 'w')
-        fd.write(data)
-        fd.close()
+        try:
+            fd = open(self.name, 'w')
+            fd.write(data)
+            fd.close()
+        except:
+            fd = open(self.name, 'wb')
+            fd.write(data)
+            fd.close()
 
     def add(self, data):
-        fd = open(self.name, 'a')
-        fd.write(data)
-        fd.close()
+        try:
+            fd = open(self.name, 'a')
+            fd.write(data)
+            fd.close()
+        except:
+            fd = open(self.name, 'ab')
+            fd.write(data)
+            fd.close()
 
     def exist(self):
         return os.path.exists(self.name)
