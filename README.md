@@ -430,6 +430,40 @@ help(lst=lstA) -> help(lst=lstA, idx=None)
 help(idx=3) -> help(lst=argv, idx=3)
 ```
 
+* 詳細なdir
+
+```python
+import enert
+
+class Hoge():
+    def my_method(self, hoge, fuga=123, piyo="abc", **kwargs):
+        print(hoge, fuga, piyo, repr(kwargs))
+
+enert.exdir(Hoge)
+```
+
+```
+############################################
+#   <class '__main__.Hoge'> - UNCALLABLE   #
+############################################
+
+__dict__
+__doc__
+__module__
+__weakref__
+
+############################################
+#    <class '__main__.Hoge'> - CALLABLE    #
+############################################
+
+...
+__gt__(self, value)
+__hash__(self)
+__init__(self, *args, **kwargs)
+...
+my_method(self, hoge, fuga=123, piyo='abc', **kwargs)
+```
+
 * search()
 
 * search_binary()

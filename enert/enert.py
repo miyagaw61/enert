@@ -896,3 +896,73 @@ def ogrep(victim, regex):
         for j in range(len(tmp_ret)):
             ret.append(tmp_ret[j])
     return ret
+
+def exdir(obj):
+    import inspect 
+    import types
+    obj_attrs = dir(obj)
+    obj_str = str(type(obj))
+    text = "#   %s - UNCALLABLE   #" % obj_str
+    print("")
+    print("#" * len(text))
+    print(text)
+    print("#" * len(text))
+    print("")
+    for obj_attr_str in obj_attrs:
+        try:
+            obj_attr = getattr(obj, obj_attr_str)
+        except:
+            print("err: %s" % obj_attr_str)
+            continue
+        #if not isinstance(obj_attr, types.FunctionType):
+        if not callable(obj_attr):
+            print(obj_attr_str)
+    text = "#    %s - CALLABLE    #" % obj_str
+    print("")
+    print("#" * len(text))
+    print(text)
+    print("#" * len(text))
+    print("")
+    excepts = []
+    for obj_attr_str in obj_attrs:
+        try:
+            obj_attr = getattr(obj, obj_attr_str)
+        except:
+            print("err: %s" % obj_attr_str)
+            continue
+        if callable(obj_attr):
+            try:
+                argspec = inspect.getargspec(obj_attr)
+            except:
+                print("%s(?)" % obj_attr_str)
+                continue
+            argspec_args = argspec.args
+            argspec_varargs = argspec.varargs
+            argspec_keywords = argspec.keywords
+            argspec_defaults = argspec.defaults
+            print("%s(" % obj_attr_str, end="")
+            if argspec_defaults != None:
+                defaults_len = len(argspec_defaults)
+            else:
+                defaults_len = 0
+            if argspec_args != None:
+                args_len = len(argspec_args)
+            else:
+                args_len = 0
+            defaults_start = args_len - defaults_len
+            for (i, x) in enumerate(argspec_args):
+                if i != 0:
+                    print(", ", end="")
+                print("%s" % x, end="")
+                if i < defaults_start:
+                    continue
+                default_value = argspec_defaults[i-defaults_start]
+                if type(default_value) == str:
+                    print("='%s'" % default_value, end="")
+                else:
+                    print("=%s" % repr(default_value), end="")
+            if argspec_varargs != None:
+                print(", *args", end="")
+            if argspec_keywords != None:
+                print(", **kwargs", end="")
+            print(")")
