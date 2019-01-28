@@ -98,6 +98,11 @@ class File:
             fd.write(data)
             fd.close()
 
+    def flush(self):
+        fd = open(self.name, 'a')
+        fd.flush()
+        fd.close()
+
     def exist(self):
         return os.path.exists(self.name)
 
