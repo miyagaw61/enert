@@ -115,6 +115,8 @@ stdout_str, stderr_str = cmd.get()
 手軽にmenuが作成できる。
 
 ```python
+from enert import *
+
 lst = ["1. hogehoge", "2. fugafuga", "3. piyopiyo"]
 def function(i):
     m.menu_exit()
