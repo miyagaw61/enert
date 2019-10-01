@@ -77,7 +77,7 @@ class Pwn():
                     continue
             return None
     
-    def attach(self, s):
+    def attach(self):
         args = []
         if not self.debug:
             return
