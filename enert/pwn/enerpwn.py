@@ -37,6 +37,14 @@ class Pwn():
         self.ssh = ssh
         context.binary = self.target
         self.elf = ELF(self.target)
+        self._update_pwnlib()
+
+    def _update_pwnlib(self):
+        def section(self, name):
+                section_info = self.get_section_by_name(name)
+                section_addr = section_info.header["sh_addr"]
+                return section_addr
+        ELF.section = section
 
     def analyze_argv(self, argv):
         if len(argv) > 2 and argv[1] == "socat":
