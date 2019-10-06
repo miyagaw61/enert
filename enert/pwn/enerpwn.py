@@ -15,8 +15,8 @@ context.terminal = "screen"
 class Pwn():
     def __init__(self,
                  target=None,
-                 l_libc="/lib/x86_64-linux-gnu/libc.so.6",
-                 r_libc="/lib/x86_64-linux-gnu/libc.so.6",
+                 l_libc="",
+                 r_libc="",
                  l_host="localhost",
                  r_host="remote.com",
                  l_port=4444,
