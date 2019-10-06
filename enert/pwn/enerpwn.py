@@ -28,6 +28,7 @@ class Pwn():
         self.target = target
         self.l_libc = l_libc
         self.r_libc = r_libc
+        self.libc= ""
         self.l_host = l_host
         self.l_port = l_port
         self.r_host = r_host
@@ -62,13 +63,16 @@ class Pwn():
                 self.s = s.process(self.target)
             else:
                 self.s = remote(self.r_host, self.r_port)
-            self.libc = ELF(self.r_libc)
+            if self.r_libc:
+                self.libc = ELF(self.r_libc)
         elif len(argv) > 1 and "l" in argv[1]:
             self.s = remote(self.l_host, self.l_port)
-            self.libc = ELF(self.l_libc)
+            if self.l_libc:
+                self.libc = ELF(self.l_libc)
         else:
             self.s = process(self.target)
-            self.libc = ELF(self.l_libc)
+            if self.l_libc:
+                self.libc = ELF(self.l_libc)
 
     def _get_pid(self, lines):
         for line in lines:
