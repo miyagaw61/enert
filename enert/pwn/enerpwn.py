@@ -53,8 +53,8 @@ class Pwn():
         ELF.section = section
 
     def analyze_argv(self, argv):
-        if len(argv) > 2 and argv[1] == "socat":
-            f = File(argv[2])
+        if len(argv) > 1 and argv[1] == "socat":
+            f = File(self.target)
             Shell("killall socat 2>&1 1> /dev/null").call()
             Shell("socat tcp-listen:4444,reuseaddr,fork exec:%s &" % f.abspath).call()
             exit()
