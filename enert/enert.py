@@ -1029,17 +1029,13 @@ def try_to_print_as_str(v):
 def try_to_print_as_bin(v):
     print(yellow("[+]", "bold"), end="")
     print(green("bin: ", "bold"), end="")
-    try:
-        if type(v) == int:
-            hexes = int2hexes(v)
-            hexes = " ".join(hexes)
-        elif type(v) == str:
-            int_v = int(v)
-            hexes = int2hexes(v)
-            hexes = " ".join(hexes)
-        print(hexes)
-    except:
+    int_data = to_int(v)
+    if int_data == None:
         print("")
+        return
+    hexes = int2hexes(v)
+    hexes = " ".join(hexes)
+    print(hexes)
 
 def try_to_print_as_various_types(v):
     try_to_print_as_str(v)
