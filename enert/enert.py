@@ -1016,3 +1016,19 @@ def try_to_print_as_various_types(v):
     try_to_print_as_int(v)
     try_to_print_as_hex(v)
     try_to_print_as_bin(v)
+
+def d(v_name):
+    v = globals()[v_name]
+    header = "#####################################"
+    footer = "-------------------------------------"
+    print("")
+    print(red(header, "bold"))
+    print(red("#", "bold"), end="")
+    space_nr = len(header) - len(v_name)
+    print(" " * (space_nr // 2), end="")
+    print(red(v_name, "bold"), end = "")
+    print(" " * (space_nr // 2 - 1), end="")
+    print(red("#", "bold"))
+    print(red(header, "bold"))
+    try_to_print_as_various_types(v)
+    print(white(footer), end="\n\n")
