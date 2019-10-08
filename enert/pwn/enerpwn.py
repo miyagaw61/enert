@@ -26,6 +26,7 @@ class Pwn():
                  ssh=False,
                  analyze_elf=True,
                  ):
+        print("[+]starting...")
         self.target = target
         self.l_libc = l_libc
         self.r_libc = r_libc
