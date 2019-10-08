@@ -972,12 +972,22 @@ def exdir(obj):
                 print(", **kwargs", end="")
             print(")")
 
+def _try_to_print_as_int(v, base):
+    try:
+        print(int(v, base))
+        return 0
+    except:
+        return -1
+
 def try_to_print_as_int(v):
     print(yellow("[+]", "bold"), end="")
     print(green("int: ", "bold"), end="")
-    try:
-        print(v)
-    except:
+    ret = -1
+    for base in [0, 10, 16]:
+        ret = _try_to_print_as_int(v, base)
+        if ret == 0:
+            break
+    if ret == -1:
         print("")
 
 def try_to_print_as_hex(v):
