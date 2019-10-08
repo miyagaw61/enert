@@ -29,7 +29,7 @@ class Pwn():
         self.target = target
         self.l_libc = l_libc
         self.r_libc = r_libc
-        self.libc= ""
+        self.libc= None
         self.l_host = l_host
         self.l_port = l_port
         self.r_host = r_host
