@@ -1010,6 +1010,10 @@ def try_to_print_as_hex(v):
             if v[:2] == "0x":
                 print(v)
                 return
+            else:
+                int_data = to_int(v)
+                print(hex(int_data))
+                return
         print(hex(v))
     except:
         print("")
