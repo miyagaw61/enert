@@ -971,3 +971,48 @@ def exdir(obj):
             if argspec_keywords != None:
                 print(", **kwargs", end="")
             print(")")
+
+def try_to_print_as_int(v):
+    print(yellow("[+]", "bold"), end="")
+    print(green("int: ", "bold"), end="")
+    try:
+        print(v)
+    except:
+        pass
+
+def try_to_print_as_hex(v):
+    print(yellow("[+]", "bold"), end="")
+    print(green("hex: ", "bold"), end="")
+    try:
+        print(hex(v))
+    except:
+        pass
+
+def try_to_print_as_str(v):
+    print(yellow("[+]", "bold"), end="")
+    print(green("str: ", "bold"), end="")
+    try:
+        print(str(v))
+    except:
+        pass
+
+def try_to_print_as_bin(v):
+    print(yellow("[+]", "bold"), end="")
+    print(green("bin: ", "bold"), end="")
+    try:
+        if type(v) == int:
+            hexes = int2hexes(v)
+            hexes = " ".join(hexes)
+        elif type(v) == str:
+            int_v = int(v)
+            hexes = int2hexes(v)
+            hexes = " ".join(hexes)
+        print(hexes)
+    except:
+        pass
+
+def try_to_print_as_various_types(v):
+    try_to_print_as_str(v)
+    try_to_print_as_int(v)
+    try_to_print_as_hex(v)
+    try_to_print_as_bin(v)
