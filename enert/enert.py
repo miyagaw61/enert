@@ -1033,7 +1033,7 @@ def try_to_print_as_bin(v):
     if int_data == None:
         print("")
         return
-    hexes = int2hexes(v)
+    hexes = int2hexes(int_data)
     hexes = " ".join(hexes)
     print(hexes)
 
