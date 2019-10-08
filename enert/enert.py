@@ -978,7 +978,7 @@ def try_to_print_as_int(v):
     try:
         print(v)
     except:
-        pass
+        print("")
 
 def try_to_print_as_hex(v):
     print(yellow("[+]", "bold"), end="")
@@ -986,7 +986,7 @@ def try_to_print_as_hex(v):
     try:
         print(hex(v))
     except:
-        pass
+        print("")
 
 def try_to_print_as_str(v):
     print(yellow("[+]", "bold"), end="")
@@ -994,7 +994,7 @@ def try_to_print_as_str(v):
     try:
         print(str(v))
     except:
-        pass
+        print("")
 
 def try_to_print_as_bin(v):
     print(yellow("[+]", "bold"), end="")
@@ -1009,7 +1009,7 @@ def try_to_print_as_bin(v):
             hexes = " ".join(hexes)
         print(hexes)
     except:
-        pass
+        print("")
 
 def try_to_print_as_various_types(v):
     try_to_print_as_str(v)
