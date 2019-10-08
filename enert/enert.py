@@ -994,6 +994,10 @@ def try_to_print_as_hex(v):
     print(yellow("[+]", "bold"), end="")
     print(green("hex: ", "bold"), end="")
     try:
+        if type(v) == str:
+            if v[:2] == "0x":
+                print(v)
+                return
         print(hex(v))
     except:
         print("")
