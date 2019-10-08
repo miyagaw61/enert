@@ -986,6 +986,11 @@ def to_int(v):
                 return None
     return int_data
 
+def print_type(v):
+    print(yellow("[+]", "bold"), end="")
+    print(green("typ: ", "bold"), end="")
+    print(type(v))
+
 def try_to_print_as_src(v):
     print(yellow("[+]", "bold"), end="")
     print(green("src: ", "bold"), end="")
@@ -1047,6 +1052,7 @@ def try_to_print_as_bin(v):
     print(hexes)
 
 def try_to_print_as_various_types(v):
+    print_type(v)
     try_to_print_as_src(v)
     try_to_print_as_str(v)
     try_to_print_as_int(v)
