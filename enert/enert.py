@@ -1023,7 +1023,7 @@ def d(v, name):
     print("")
     print(red(header, "bold"))
     print(red("#", "bold"), end="")
-    space_nr = len(header) - len(v_name)
+    space_nr = len(header) - len(name)
     print(" " * (space_nr // 2), end="")
     print(red(name, "bold"), end = "")
     print(" " * (space_nr // 2 - 1), end="")
