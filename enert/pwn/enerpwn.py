@@ -24,6 +24,7 @@ class Pwn():
                  r_user="user",
                  r_password="password",
                  ssh=False,
+                 analyze_elf=True,
                  ):
         self.target = target
         self.l_libc = l_libc
@@ -37,7 +38,10 @@ class Pwn():
         self.r_password = r_password
         self.ssh = ssh
         context.binary = self.target
-        self.elf = ELF(self.target)
+        if analyze_elf:
+            self.elf = ELF(self.target)
+        else:
+            self.elf = None
         self._update_pwnlib()
 
     def _update_pwnlib(self):
