@@ -973,6 +973,8 @@ def exdir(obj):
             print(")")
 
 def to_int(v):
+    if type(v) == int:
+        return v
     int_data = None
     try:
         int_data = int(v, 0)
