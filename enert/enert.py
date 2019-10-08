@@ -996,13 +996,11 @@ def _to_print_as_int(v, base):
 def try_to_print_as_int(v):
     print(yellow("[+]", "bold"), end="")
     print(green("int: ", "bold"), end="")
-    ret = -1
-    for base in [0, 10, 16]:
-        ret = _try_to_print_as_int(v, base)
-        if ret == 0:
-            break
-    if ret == -1:
+    int_data = to_int(v)
+    if int_data == None:
         print("")
+    else:
+        print(int_data)
 
 def try_to_print_as_hex(v):
     print(yellow("[+]", "bold"), end="")
