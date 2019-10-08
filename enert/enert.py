@@ -1068,9 +1068,12 @@ def d(v, name):
     print(red(header, "bold"))
     print(red("#", "bold"), end="")
     space_nr = len(header) - len(name)
+    is_odd = space_nr / 2 - space_nr // 2
     print(" " * (space_nr // 2), end="")
     print(red(name, "bold"), end = "")
-    print(" " * (space_nr // 2 - 1), end="")
+    print(" " * (space_nr // 2 - 2), end="")
+    if is_odd:
+        print(" ", end="")
     print(red("#", "bold"))
     print(red(header, "bold"))
     try_to_print_as_various_types(v)
