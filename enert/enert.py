@@ -972,7 +972,21 @@ def exdir(obj):
                 print(", **kwargs", end="")
             print(")")
 
-def _try_to_print_as_int(v, base):
+def to_int(v):
+    int_data = None
+    try:
+        int_data = int(v, 0)
+    except:
+        try:
+            int_data = int(v, 16)
+        except:
+            try:
+                int_data = int(v, 10)
+            except:
+                return None
+    return int_data
+
+def _to_print_as_int(v, base):
     try:
         print(int(v, base))
         return 0
