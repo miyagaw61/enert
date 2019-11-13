@@ -1078,3 +1078,10 @@ def d(v, name):
     print(red(header, "bold"))
     try_to_print_as_various_types(v)
     print(white(footer), end="\n\n")
+
+def get(x, key):
+    try:
+        val = x[key]
+        return val
+    except:
+        return None
