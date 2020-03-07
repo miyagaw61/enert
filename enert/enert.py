@@ -17,6 +17,7 @@ import platform
 from backports import shutil_get_terminal_size
 from argparse import *
 from distutils.dir_util import copy_tree
+import random
 
 class File:
     def __init__(self, file_name):
@@ -194,7 +195,10 @@ class Shell:
 
     def readlines(self):
         stdout_str, stderr_str = self.read()
-        f = fl('/tmp/enert.tmp')
+        cmd = "date '+%Y%m%d-%H%M%S'"
+        now = subprocess.check_output(cmd, shell=True).decode()[:-1]
+        rand_num = random.randint(1, 99999999)
+        f = fl(f"/tmp/enert_{now}_{rand_num}.tmp")
         f.write(stdout_str)
         linedata = []
         linedata.append(f.linedata())
