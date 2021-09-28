@@ -1,4 +1,4 @@
-#!/home/miyagaw61/.pyenv/shims/python
+#!/home/miyase256/.pyenv/shims/python
 from enert import *
 
 main_usage  = 'example_script [2] [3] [hoge <4> <5> <fuga>]'
