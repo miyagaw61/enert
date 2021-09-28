@@ -16,6 +16,7 @@ from backports import shutil_get_terminal_size
 from argparse import *
 from distutils.dir_util import copy_tree
 import random
+import inspect
 
 class File:
     def __init__(self, file_name):
@@ -1087,3 +1088,26 @@ def get(x, key):
         return val
     except:
         return None
+
+def getframeinfo(stackIndex=2):
+    """
+    @see http://stackoverflow.com/questions/6810999/how-to-determine-file-function-and-line-number
+    @return frameInfo
+    """
+    stack = inspect.stack()
+    if stackIndex >= len(stack):
+        return None
+    callerframerecord = stack[stackIndex]
+    frame = callerframerecord[0]
+    info = inspect.getframeinfo(frame)
+    return info
+
+def get_file():
+    return str(getframeinfo().filename)
+
+def get_line():
+    return str(getframeinfo().lineno)
+
+def get_function():
+    return str(getframeinfo().function)
+
