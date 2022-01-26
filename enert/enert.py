@@ -18,6 +18,22 @@ from distutils.dir_util import copy_tree
 import random
 import inspect
 
+def mydecode(s):
+    while True:
+        try:
+            s = s.decode()
+            break
+        except:
+            pass
+        try:
+            s = s.decode('shift_jis')
+            break
+        except:
+            pass
+        s = "ERROR: failed to decode"
+        break
+    return s
+
 class File:
     def __init__(self, file_name):
         if file_name[-1] == '/':
@@ -187,15 +203,15 @@ class Shell:
                 stderr = subprocess.PIPE)
         stdout_str, stderr_str = proc.communicate()
         if type(stdout_str) == bytes:
-            stdout_str = stdout_str.decode()
+            stdout_str = mydecode(stdout_str)
         if type(stderr_str) == bytes:
-            stderr_str = stderr_str.decode()
+            stderr_str = mydecode(stderr_str)
         return [stdout_str, stderr_str]
 
     def readlines(self):
         stdout_str, stderr_str = self.read()
         cmd = "date '+%Y%m%d-%H%M%S'"
-        now = subprocess.check_output(cmd, shell=True).decode()[:-1]
+        now = mydecode(subprocess.check_output(cmd, shell=True))[:-1]
         rand_num = random.randint(1, 99999999)
         f = fl(f"/tmp/enert_{now}_{rand_num}.tmp")
         f.write(stdout_str)
@@ -309,7 +325,7 @@ def dmp(binary, fmt=None):
         arr = splitn(res, fmt)
         res = []
         for var in arr:
-            res.append(ascii2addr(var.decode()))
+            res.append(ascii2addr(mydecode(var)))
     return res
 
 def complement(value, s):
@@ -822,7 +838,7 @@ def int2hexes(int_data):
     return bin2hexes(bin_data)
         
 def sanitize(text):
-    return text.encode('utf-8', 'replace').decode('utf-8')
+    return mydecode(text.encode('utf-8', 'replace'))
 
 def pad(s, b_size):
     length = len(s)
