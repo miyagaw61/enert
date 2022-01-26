@@ -214,6 +214,14 @@ class Shell:
         now = mydecode(subprocess.check_output(cmd, shell=True))[:-1]
         rand_num = random.randint(1, 99999999)
         f = fl(f"/tmp/enert_{now}_{rand_num}.tmp")
+        if "入力された日付は受け付けられません" in now:
+            cmd = "date /t"
+            now = mydecode(subprocess.check_output(cmd, shell=True))[:-1]
+            now = now.replace("/", "-")
+            now = now.replace(" ", "")
+            now = now.replace("\n", "")
+            now = now.replace("\r", "")
+            f = fl(f".\enert_{now}_{rand_num}.tmp")
         f.write(stdout_str)
         linedata = []
         linedata.append(f.linedata())
