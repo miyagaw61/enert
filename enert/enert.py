@@ -470,11 +470,11 @@ def help_check(lst, idx=None):
     Example: help_check(argv[2:]) #check argv[2:] in '-h' or '--help'
     Example: help_check(argv[2:], 3) # check argc < 3
     """
-    if '-h' in argv or '--help' in argv:
+    if '-h' in lst or '--help' in lst:
         return 1
     else:
         if idx:
-            if argc < idx:
+            if len(lst) < idx:
                 return 1
             else:
                 return 0
