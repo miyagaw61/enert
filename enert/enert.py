@@ -1135,3 +1135,24 @@ def get_line():
 def get_function():
     return str(getframeinfo().function)
 
+def output_dict_with_marks(d, mark = "=", edge = ">", name = ""):
+    special_char_size = len(red(""))
+    max_value = max(d.values())
+    max_value_size = max_value * len(mark) + len(edge)
+    max_graph_size = max_value_size + special_char_size
+    keys = d.keys()
+    key_size_list = map(len, keys)
+    max_key_size = max(key_size_list)
+    if name != "":
+        name_size = max_key_size + len(": |") + max_value_size + len("|")
+        print("\n")
+        print(f"{name: ^{name_size}}")
+        print("_" * name_size)
+    marks = ""
+    for key in d:
+        marks = ""
+        for _ in range(d[key]):
+            marks = marks + mark
+        marks = marks + edge
+        marks = red(marks)
+        print(f"{key:<{max_key_size}}: |{marks:|<{max_graph_size}}| {d[key]}")
