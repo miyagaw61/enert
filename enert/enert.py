@@ -164,10 +164,7 @@ class File:
             dst = dst.name
         if not os.path.exists(self.name):
             return None
-        if os.path.isdir(self.name):
-            copy_tree(self.name, dst)
-        else:
-            shutil.copy2(self.name, dst)
+        shutil.move(self.name, dst)
         self.rm()
 
     def create(self):
