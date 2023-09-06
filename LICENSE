@@ -1,5 +1,5 @@
 TL;DR version:
-   Everything in https://github.com/miyase256/enert.git is open source. Most is under an MIT license,
+   Everything in https://github.com/miyagaw61/enert.git is open source. Most is under an MIT license,
    but a few pieces are under GPL or a BSD 2-clause licence.
 
 This license covers everything within this project, except for a few pieces
@@ -14,8 +14,8 @@ directories:
 - enert/pwntools3
 
 Copyright (c) 2017 Taisei Miyagawa
-Twitter: @miyase256
-WebPage: https://miyase256.github.io
+Twitter: @miyagaw61
+WebPage: https://miyagaw61.github.io
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

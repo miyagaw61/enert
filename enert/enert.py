@@ -1,5 +1,5 @@
 #       enert - util python library
-#       Copyright (C) 2017 Taisei Miyagawa <Twitter: @miyase256, WebPage: miyase256.github.io>
+#       Copyright (C) 2017 Taisei Miyagawa <Twitter: @miyagaw61, WebPage: miyagaw61.github.io>
 #       License: MIT
 
 from __future__ import division, print_function, absolute_import, unicode_literals
